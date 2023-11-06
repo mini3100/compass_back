@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AccountController {
 
-    @GetMapping("/account/principal")
+    @GetMapping("/api/account/principal")
     public ResponseEntity<?> getPrincipal() {
         PrincipalUser principalUser =
                 (PrincipalUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
