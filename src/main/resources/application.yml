@@ -5,6 +5,12 @@ spring:
     oauth2:
       client:
         registration:
+          kakao:
+            clientId: 2dc5c2ec61e5efeb6b952c1b5d381821
+            redirectUri: http://localhost:8080/login/oauth2/code/kakao
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: POST
+            clientName: Kakao
           naver:
             clientId: i4eW_RUc74M3Ci96bJuG
             redirectUri: http://localhost:8080/login/oauth2/code/naver
@@ -12,12 +18,16 @@ spring:
             clientAuthenticationMethod: POST
             clientName: Naver
         provider:
+          kakao:
+            authorizationUri: https://kauth.kakao.com/oauth/authorize
+            tokenUri: https://kauth.kakao.com/oauth/token
+            userInfoUri: https://kapi.kakao.com/v2/user/me
+            userNameAttribute: id
           naver:
             authorizationUri: https://nid.naver.com/oauth2.0/authorize
             tokenUri: https://nid.naver.com/oauth2.0/token
             userInfoUri: https://openapi.naver.com/v1/nid/me
             userNameAttribute: response
-
 
 mybatis:
   mapper-locations:
