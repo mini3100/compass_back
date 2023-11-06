@@ -1,4 +1,25 @@
 spring:
-  profile.include:
-    -secret
+  profiles.include:
+    - secret
+  security:
+    oauth2:
+      client:
+        registration:
+          naver:
+            clientId: i4eW_RUc74M3Ci96bJuG
+            clientSecret: Y0d1l8Df2q
+            redirectUri: http://localhost:8080/login/oauth2/code/naver
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: POST
+            clientName: Naver
+        provider:
+          naver:
+            authorizationUri: https://nid.naver.com/oauth2.0/authorize
+            tokenUri: https://nid.naver.com/oauth2.0/token
+            userInfoUri: https://openapi.naver.com/v1/nid/me
+            userNameAttribute: response
 
+
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml
