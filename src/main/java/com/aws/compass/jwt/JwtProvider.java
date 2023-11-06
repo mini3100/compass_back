@@ -30,14 +30,16 @@ public class JwtProvider {
         }
 
         public String generateToken(Authentication authentication) {
-            String email = authentication.getName();
+            PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+            String oauth2Id = authentication.getName();
 
             Date date = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
 
             return Jwts.builder()
                     .setSubject("AccessToken")
                     .setExpiration(date)
-                    .claim("email", email)
+                    .claim("oauth2Id", oauth2Id)
+                    .claim("email", principalUser.getUser().getEmail())
                     .signWith(key, SignatureAlgorithm.HS256)
                     .compact();
         }
@@ -66,6 +68,7 @@ public class JwtProvider {
         // 토큰이 유효한지 확인해 Authentication 객체를 반환하는 함수
         public Authentication getAuthentication(String token) {
             Claims claims = getClaims(token);
+            System.out.println(claims);
             if(claims == null) {    // 토큰이 유효하지 않은 경우
                 return null;
             }

@@ -7,7 +7,6 @@ spring:
         registration:
           naver:
             clientId: i4eW_RUc74M3Ci96bJuG
-            clientSecret: Y0d1l8Df2q
             redirectUri: http://localhost:8080/login/oauth2/code/naver
             authorizationGrantType: authorization_code
             clientAuthenticationMethod: POST
