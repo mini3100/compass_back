@@ -28,18 +28,16 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String oauth2Id = authentication.getName(); // loadUser에서 return 했던 DefaultOAuth2User의 key값
+        String oauth2Id = authentication.getName(); // PrincipalUserDetailsService의 loadUser에서 return 했던 DefaultOAuth2User의 key값
         User user = userMapper.findUserByOauth2Id(oauth2Id);
 
         if (user == null) { // 소셜 로그인 돼있는 유저가 없다면 -> 새로 회원가입
             DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
-            String name = defaultOAuth2User.getAttributes().get("name").toString();
             String provider = defaultOAuth2User.getAttributes().get("provider").toString();
 
             // 회원가입이 안 되었을 때 OAuth2 계정 회원가입 페이지로 이동
             response.sendRedirect("http://localhost:3000/auth/detail/signup" +
                     "?oauth2Id=" + oauth2Id +
-                    "&name=" + URLEncoder.encode(name, "UTF-8") +
                     "&provider=" + provider);
             return;
         }
@@ -50,6 +48,5 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String accessToken = jwtProvider.generateToken(authenticationToken);
         response.sendRedirect("http://localhost:3000/auth/oauth2/signin" +  // client로 token을 보낸다
                 "?token=" + URLEncoder.encode(accessToken));
-
     }
 }
