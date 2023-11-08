@@ -19,5 +19,10 @@ public class OptionsController {
         return ResponseEntity.ok(optionService.getEducationOfficeList());
     }
 
+    @GetMapping("/administrative-districts")
+    public ResponseEntity<?> getAdministrativeDistrict() {
+        return  ResponseEntity.ok(optionService.getAdministrativeDistrictList());
+    }
+
 
 }

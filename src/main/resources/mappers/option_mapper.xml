@@ -10,6 +10,12 @@
         <id property="educationOfficeCode" column="education_office_code" />
 
     </resultMap>
+    <resultMap id="administrativeDistrictMap" type="com.aws.compass.entity.AdministrativeDistrict">
+        <id property="administrativeDistrictId" column="administrative_district_id" />
+        <id property="educationOfficeCode" column="education_office_code" />
+        <id property="administrativeDistrictName" column="administrative_district_name" />
+    </resultMap>
+
 
     <select id="getEducationOfficeList" resultMap="educationOfficeMap">
         select
@@ -18,5 +24,14 @@
             education_office_code
         from
             education_office_tb
+    </select>
+
+    <select id="getAdministrativeDistrictList"   resultMap="administrativeDistrictMap">
+        select
+            administrative_district_id,
+            education_office_code,
+            administrative_district_name
+        from
+            administrative_district_tb
     </select>
 </mapper>
