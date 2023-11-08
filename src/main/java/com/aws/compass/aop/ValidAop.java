@@ -1,4 +1,4 @@
-package com.aws.compass.api;
+package com.aws.compass.aop;
 
 import com.aws.compass.exception.ValidException;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Aspect
 @Component
 public class ValidAop {
-    @Pointcut("@annotation(com.aws.compass.api.annotation.ValidAop)")
+    @Pointcut("@annotation(com.aws.compass.aop.annotation.ValidAop)")
     private void pointCut() {}
 
     @Around("pointCut()")

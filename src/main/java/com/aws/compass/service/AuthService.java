@@ -25,7 +25,7 @@ public class AuthService {
         return authMapper.saveUser(user) > 0;
     }
 
-    private void responseDuplicateError(int errorCode) {
+    public void responseDuplicateError(int errorCode) {
         Map<String, String> errorMap = new HashMap<>();
         switch (errorCode) {
             case 1:

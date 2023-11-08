@@ -24,5 +24,49 @@
         where
             user_id = #{userId}
     </update>
+    <update id="updateEnabledToEmail">
+        update
+            user_tb
+        set
+            enabled = 1
+        where
+            email = #{email}
+    </update>
+    <select id="findUserByEmail" resultMap="userMap">
+        select
+            user_id,
+            email,
+            oauth2_id,
+            name,
+            nickname,
+            phone,
+            provider,
+            enabled
+        from
+            user_tb
+        where
+            email = #{email}
+    </select>
+    <select id="checkDuplicateAndIdNot"
+            parameterType="com.aws.compass.entity.User"
+            resultType="java.lang.Integer">
+        select
+            (select
+                if(count(*) > 0, 1, 0)
+            from
+                user_tb
+            where
+                email = #{email}
+                and user_id != #{userId}
+            )
+            + (select
+                if(count(*) > 0, 2, 0)
+            from
+                user_tb
+            where
+                nickname = #{nickname}
+                and user_id != #{userId}
+            ) as result
+    </select>
 
 </mapper>

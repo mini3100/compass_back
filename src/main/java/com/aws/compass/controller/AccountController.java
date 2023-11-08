@@ -1,5 +1,6 @@
 package com.aws.compass.controller;
 
+import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.EditUserReqDto;
 import com.aws.compass.dto.PrincipalRespDto;
 import com.aws.compass.entity.User;
@@ -28,10 +29,22 @@ public class AccountController {
         return ResponseEntity.ok(principalRespDto);
     }
 
+    @ValidAop
     @PutMapping("/api/account/user/{userId}")
     public ResponseEntity<?> editUser(@PathVariable int userId,
                                       @Valid @RequestBody EditUserReqDto editUserReqDto,
                                       BindingResult bindingResult) {
         return ResponseEntity.ok(accountService.updateUser(userId,editUserReqDto));
+    }
+
+    @PostMapping("/api/account/auth/email")
+    public ResponseEntity<?> sendAuthenticationMail() {
+        return ResponseEntity.ok(accountService.sendAuthMail());
+    }
+
+    @GetMapping("/api/account/auth/email")
+    public ResponseEntity<?> authenticateMail (String token) {
+        //주소의 토큰을 받고 유효한지 확인
+        return ResponseEntity.ok(accountService.authenticateMail(token) ? "인증 완료" : "인증 실패");
     }
 }
