@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aws.compass.repository.UserMapper">
+<mapper namespace="com.aws.compass.repository.AuthMapper">
     <resultMap id="userMap" type="com.aws.compass.entity.User">
         <id property="userId" column="user_id"/>
         <result property="email" column="email"/>

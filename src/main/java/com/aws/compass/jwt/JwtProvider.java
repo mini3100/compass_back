@@ -1,7 +1,7 @@
 package com.aws.compass.jwt;
 
 import com.aws.compass.entity.User;
-import com.aws.compass.repository.UserMapper;
+import com.aws.compass.repository.AuthMapper;
 import com.aws.compass.security.PrincipalUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,12 +21,12 @@ import java.util.Date;
 @Component
 public class JwtProvider {
     private final Key key;
-        private final UserMapper userMapper;
+        private final AuthMapper authMapper;
 
         public JwtProvider(@Value("${jwt.secret}") String secret,
-                           @Autowired UserMapper userMapper) {
+                           @Autowired AuthMapper authMapper) {
             key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
-            this.userMapper = userMapper;
+            this.authMapper = authMapper;
         }
 
         public String generateToken(Authentication authentication) {
@@ -68,14 +68,13 @@ public class JwtProvider {
         // 토큰이 유효한지 확인해 Authentication 객체를 반환하는 함수
         public Authentication getAuthentication(String token) {
             Claims claims = getClaims(token);
-            System.out.println(claims);
             if(claims == null) {    // 토큰이 유효하지 않은 경우
                 return null;
             }
 
             // 클레임 정보에서 이메일 값을 추출하여 해당 이메일을 가진 사용자를 데이터베이스에서 찾음
             // oauth2 로그인만 있으므로 oauth2id로 확인
-            User user = userMapper.findUserByOauth2Id(claims.get("oauth2Id").toString());
+            User user = authMapper.findUserByOauth2Id(claims.get("oauth2Id").toString());
             if(user == null) {  // 토큰은 유효하지만 db에서 user를 지워버렸을 경우
                 return null;
             }
