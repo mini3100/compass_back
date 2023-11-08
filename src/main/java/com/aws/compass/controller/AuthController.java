@@ -1,6 +1,6 @@
 package com.aws.compass.controller;
 
-import com.aws.compass.api.annotation.ValidAop;
+import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.SignupReqDto;
 import com.aws.compass.service.AuthService;
 import lombok.RequiredArgsConstructor;

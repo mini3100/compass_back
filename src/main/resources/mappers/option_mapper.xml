@@ -26,6 +26,7 @@
             education_office_tb
     </select>
 
+<<<<<<< HEAD
     <select id="getAdministrativeDistrictList"   resultMap="administrativeDistrictMap">
         select
             administrative_district_id,
@@ -34,4 +35,7 @@
         from
             administrative_district_tb
     </select>
+=======
+
+>>>>>>> main
 </mapper>
