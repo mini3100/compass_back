@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aws.compass.repository.AcademyMapper">
+
+
+    <insert id="academyRegist" parameterType="com.aws.compass.entity.AcademyRegistration">
+        insert into academy_registration_tb
+        values(
+        0,
+        #{acaAsnum},
+        #{acaNm},
+        #{admstZoneNm},
+        #{atptOfcdcScCode},
+        #{match},
+        #{userId},
+        #{businessRegistrationFile},
+        #{idFile},
+        #{operationRegistrationFile}
+        )
+
+    </insert>
+</mapper>
