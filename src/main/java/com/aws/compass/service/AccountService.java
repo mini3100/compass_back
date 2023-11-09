@@ -3,6 +3,7 @@ package com.aws.compass.service;
 import com.aws.compass.dto.EditUserReqDto;
 import com.aws.compass.entity.User;
 import com.aws.compass.exception.AuthMailException;
+import com.aws.compass.exception.SendMailException;
 import com.aws.compass.jwt.JwtProvider;
 import com.aws.compass.repository.AccountMapper;
 import com.aws.compass.repository.AuthMapper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.MimeMessage;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,15 @@ public class AccountService {
         int errorCode = accountMapper.checkDuplicateAndIdNot(newUser);
         if(errorCode > 0) {
             authService.responseDuplicateError(errorCode);
+        }
+
+        PrincipalUser principalUser = (PrincipalUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User oldUser = principalUser.getUser();
+
+        if(oldUser.getEnabled() > 0 && !Objects.equals(oldUser.getEmail(), newUser.getEmail())) {  // 이메일 변경 하면 enabled 0으로 업데이트 해줘야 함.
+            newUser.setEnabled(0);
+        } else {
+            newUser.setEnabled(oldUser.getEnabled());
         }
 
         return accountMapper.updateUser(newUser) > 0;
@@ -62,7 +73,7 @@ public class AccountService {
             javaMailSender.send(mimeMailMessage);       //설정한 메시지를 sender를 통해 전달함
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw new SendMailException("이메일 전송이 실패했습니다.");
         }
         return true;
     }

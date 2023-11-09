@@ -1,6 +1,7 @@
 package com.aws.compass.controller;
 
 import com.aws.compass.exception.DuplicateException;
+import com.aws.compass.exception.SendMailException;
 import com.aws.compass.exception.ValidException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,13 @@ public class ExceptionControllerAdvice {
         Map<String, String> message = new HashMap<>();
         message.put("authError", "사용자 정보를 확인해 주세요.");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+    }
+
+    @ExceptionHandler(SendMailException.class)
+    public ResponseEntity<?> sendMailException(SendMailException sendMailException) {
+        Map<String, String> message = new HashMap<>();
+        message.put("sendFail", "이메일 전송이 실패했습니다.");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
     }
 
     @ExceptionHandler(DisabledException.class)
