@@ -8,17 +8,23 @@
     <insert id="academyRegist" parameterType="com.aws.compass.entity.AcademyRegistration">
         insert into academy_registration_tb
         values(
-        0,
-        #{acaAsnum},
-        #{acaNm},
-        #{admstZoneNm},
-        #{atptOfcdcScCode},
-        #{match},
-        #{userId},
-        #{businessRegistrationFile},
-        #{idFile},
-        #{operationRegistrationFile}
+            0,
+            #{acaAsnum},
+            #{acaNm},
+            #{admstZoneNm},
+            #{atptOfcdcScCode},
+            #{match},
+            #{userId},
+            #{businessRegistrationFile},
+            #{idFile},
+            <choose>
+                <when test='operationRegistrationFile==null or operationRegistrationFile.equals("")'>
+                    ""
+                </when>
+                <otherwise>
+                    #{operationRegistrationFile}
+                </otherwise>
+            </choose>
         )
-
     </insert>
 </mapper>

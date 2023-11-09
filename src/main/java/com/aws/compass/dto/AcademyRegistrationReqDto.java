@@ -4,16 +4,13 @@ import com.aws.compass.entity.AcademyRegistration;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
 public class AcademyRegistrationReqDto {
-
-    private int academyRegistrationId;
-    private int acaAsnum;
+    private String acaAsnum;
     private String acaNm;
     private String admstZoneNm;
     private String atptOfcdcScCode;
-    private int match;
+    private String match;
     private int userId;
     private String businessRegistrationFile;
     private String idFile;
@@ -21,7 +18,6 @@ public class AcademyRegistrationReqDto {
 
     public AcademyRegistration toAcademyRegist() {
         return AcademyRegistration.builder()
-                .academyRegistrationId(academyRegistrationId)
                 .acaAsnum(acaAsnum)
                 .acaNm(acaNm)
                 .admstZoneNm(admstZoneNm)
@@ -33,5 +29,4 @@ public class AcademyRegistrationReqDto {
                 .operationRegistrationFile(operationRegistrationFile)
                 .build();
     }
-
 }
