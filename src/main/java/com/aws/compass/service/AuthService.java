@@ -3,9 +3,8 @@ package com.aws.compass.service;
 import com.aws.compass.dto.SignupReqDto;
 import com.aws.compass.entity.User;
 import com.aws.compass.exception.DuplicateException;
-import com.aws.compass.repository.UserMapper;
+import com.aws.compass.repository.AuthMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -15,18 +14,18 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UserMapper userMapper;
+    private final AuthMapper authMapper;
 
     public boolean signup(SignupReqDto signupReqDto) {
         User user = signupReqDto.toUser();
-        int errorCode = userMapper.checkDuplicate(user);
+        int errorCode = authMapper.checkDuplicate(user);
         if(errorCode > 0) {
             responseDuplicateError(errorCode);
         }
-        return userMapper.saveUser(user) > 0;
+        return authMapper.saveUser(user) > 0;
     }
 
-    private void responseDuplicateError(int errorCode) {
+    public void responseDuplicateError(int errorCode) {
         Map<String, String> errorMap = new HashMap<>();
         switch (errorCode) {
             case 1:
