@@ -20,7 +20,8 @@
             email = #{email},
             name = #{name},
             nickname = #{nickname},
-            phone = #{phone}
+            phone = #{phone},
+            enabled = #{enabled}
         where
             user_id = #{userId}
     </update>
