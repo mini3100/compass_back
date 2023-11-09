@@ -10,16 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AcademyRegistration {
-
     private int academyRegistrationId;
-    private int acaAsnum;
+    private String acaAsnum;
     private String acaNm;
     private String admstZoneNm;
     private String atptOfcdcScCode;
-    private int match;
+    private String match;
     private int userId;
     private String businessRegistrationFile;
     private String idFile;
     private String operationRegistrationFile;
-
 }
