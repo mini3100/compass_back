@@ -19,12 +19,22 @@
             #{idFile},
             <choose>
                 <when test='operationRegistrationFile==null or operationRegistrationFile.equals("")'>
-                    ""
+                    '',
                 </when>
                 <otherwise>
-                    #{operationRegistrationFile}
+                    #{operationRegistrationFile},
                 </otherwise>
             </choose>
+            0
         )
     </insert>
+    <select id="academyDuplicate" resultType="java.lang.Integer">
+        select
+        	if(count(*) > 1, 1, 0) as result
+        from
+        	academy_registration_tb
+        where
+        	aca_asnum = #{acaAsnum} and
+            atpt_ofcdc_sc_code = #{atptOfcdcScCode};
+    </select>
 </mapper>
