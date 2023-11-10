@@ -24,5 +24,15 @@ public class OptionsController {
         return  ResponseEntity.ok(optionService.getAdministrativeDistrictList());
     }
 
+    @GetMapping("/categories")
+    public ResponseEntity<?> getCategories() {
+        return  ResponseEntity.ok(optionService.getCategoryList());
+    }
+
+    @GetMapping("/category-details")
+    public ResponseEntity<?> getCategoryDetails() {
+        return  ResponseEntity.ok(optionService.getCategoryDetailList());
+    }
+
 
 }
