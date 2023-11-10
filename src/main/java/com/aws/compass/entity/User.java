@@ -16,8 +16,10 @@ public class User {
     private String phone;
     private String provider;
     private int enabled;
+    private int roleId;
 
     public PrincipalRespDto toPrincipalDto() {
+        System.out.println(roleId);
         return PrincipalRespDto.builder()
                 .userId(userId)
                 .email(email)
@@ -27,6 +29,7 @@ public class User {
                 .phone(phone)
                 .provider(provider)
                 .enabled(enabled > 0)
+                .roleId(roleId)
                 .build();
     }
 }

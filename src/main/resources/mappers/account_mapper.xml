@@ -12,6 +12,8 @@
         <result property="phone" column="phone"/>
         <result property="provider" column="provider"/>
         <result property="enabled" column="enabled"/>
+        <result property="roleId" column="role_id"/>
+
     </resultMap>
     <update id="updateUser">
         update
@@ -20,8 +22,7 @@
             email = #{email},
             name = #{name},
             nickname = #{nickname},
-            phone = #{phone},
-            enabled = #{enabled}
+            phone = #{phone}
         where
             user_id = #{userId}
     </update>
@@ -42,7 +43,8 @@
             nickname,
             phone,
             provider,
-            enabled
+            enabled,
+            role_id
         from
             user_tb
         where
