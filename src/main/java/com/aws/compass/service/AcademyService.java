@@ -1,6 +1,6 @@
 package com.aws.compass.service;
 
-import com.aws.compass.dto.AcademyInfoRespDto;
+import com.aws.compass.dto.AcademyListRespDto;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.entity.Academy;
@@ -32,10 +32,14 @@ public class AcademyService {
         return academyMapper.academyRegist(academyRegistration) > 0;
     }
 
-    public AcademyInfoRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
+    public AcademyListRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
-        return new AcademyInfoRespDto(listTotalCount, academies);
+        return new AcademyListRespDto(listTotalCount, academies);
+    }
+
+    public Academy getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
+        return academyMapper.getAcademy(searchAcademysReqDto);
     }
 }
 
