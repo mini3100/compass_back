@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class AcademyRegistration {
     private int academyRegistrationId;
+    private int academyId;
     private String acaAsnum;
     private String acaNm;
     private String admstZoneNm;
-    private String atptOfcdcScCode;
     private String match;
     private int userId;
     private String name;
@@ -27,9 +27,10 @@ public class AcademyRegistration {
     public AwaitingAcademiesRepDto toAwaitingAcademiesDto() {
         return AwaitingAcademiesRepDto.builder()
                 .academyRegistrationId(academyRegistrationId)
+                .academyId(academyId)
                 .acaAsnum(acaAsnum)
+                .acaNm(acaNm)
                 .admstZoneNm(admstZoneNm)
-                .atptOfcdcScCode(atptOfcdcScCode)
                 .match(match)
                 .userId(userId)
                 .name(name)

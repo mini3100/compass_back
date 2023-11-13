@@ -76,7 +76,11 @@
             and ACA_ASNUM = #{acaAsnum}
         </if>
         <if test="acaNm!=null and !acaNm.equals('')">
+<<<<<<< HEAD
             and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
+=======
+            and ACA_NM like concat("%",#{acaNm},"%")
+>>>>>>> origin/요청-경로-수정api-대신-db사용-#32
         </if>
         <if test="realmScNm!=null and !realmScNm.equals('')">
             and REALM_SC_NM = #{realmScNm}
@@ -94,10 +98,7 @@
         insert into academy_registration_tb
         values(
             0,
-            #{acaAsnum},
-            #{acaNm},
-            #{admstZoneNm},
-            #{atptOfcdcScCode},
+            #{academyId},
             #{match},
             #{userId},
             #{businessRegistrationFile},
@@ -119,7 +120,6 @@
         from
         	academy_registration_tb
         where
-        	aca_asnum = #{acaAsnum} and
-            atpt_ofcdc_sc_code = #{atptOfcdcScCode};
+        	ACADEMY_ID = #{academyId};
     </select>
 </mapper>
