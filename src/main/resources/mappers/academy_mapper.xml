@@ -21,7 +21,7 @@
                 and ACA_ASNUM = #{acaAsnum}
             </if>
             <if test="acaNm!=null and !acaNm.equals('')">
-                and ACA_NM = #{acaNm}
+                and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
             </if>
             <if test="realmScNm!=null and !realmScNm.equals('')">
                 and REALM_SC_NM = #{realmScNm}
@@ -76,7 +76,7 @@
             and ACA_ASNUM = #{acaAsnum}
         </if>
         <if test="acaNm!=null and !acaNm.equals('')">
-            and ACA_NM = #{acaNm}
+            and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
         </if>
         <if test="realmScNm!=null and !realmScNm.equals('')">
             and REALM_SC_NM = #{realmScNm}
