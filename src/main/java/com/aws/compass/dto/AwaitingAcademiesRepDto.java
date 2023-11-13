@@ -1,16 +1,11 @@
-package com.aws.compass.entity;
+package com.aws.compass.dto;
 
-import com.aws.compass.dto.AwaitingAcademiesRepDto;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class AcademyRegistration {
+public class AwaitingAcademiesRepDto {
     private int academyRegistrationId;
     private String acaAsnum;
     private String acaNm;
@@ -18,8 +13,8 @@ public class AcademyRegistration {
     private String atptOfcdcScCode;
     private String match;
     private int userId;
+    private String name;
     private String businessRegistrationFile;
     private String idFile;
     private String operationRegistrationFile;
-    private int approvalStatus;
 }

@@ -7,12 +7,9 @@ import com.aws.compass.entity.Academy;
 import com.aws.compass.entity.AcademyRegistration;
 import com.aws.compass.exception.AcademyException;
 import com.aws.compass.repository.AcademyMapper;
-import com.aws.compass.vo.AcademySearchVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service

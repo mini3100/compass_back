@@ -4,7 +4,6 @@ import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.service.AcademyService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 
 @RestController
@@ -29,8 +27,7 @@ public class AcademyController {
 
     @ValidAop
     @PostMapping("/api/academy")
-    public ResponseEntity getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
-        System.out.println(academyRegistrationReqDto);
+    public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
 }
