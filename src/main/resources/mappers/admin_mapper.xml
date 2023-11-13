@@ -3,12 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aws.compass.repository.AdminMapper">
-    <resultMap id="academyMap" type="com.aws.compass.entity.AcademyRegistration">
+    <resultMap id="academyRegistrationMap" type="com.aws.compass.entity.AcademyRegistration">
         <id property="academyRegistrationId" column="academy_registration_id"/>
-        <result property="acaAsnum" column="aca_asnum"/>
-        <result property="acaNm" column="aca_nm"/>
-        <result property="admstZoneNm" column="admst_zone_nm"/>
-        <result property="atptOfcdcScCode" column="atpt_ofcdc_sc_code"/>
+        <result property="academyId" column="ACADEMY_ID"/>
+        <result property="acaAsnum" column="ACA_ASNUM"/>
+        <result property="acaNm" column="ACA_NM"/>
+        <result property="admstZoneNm" column="ADMST_ZONE_NM"/>
         <result property="match" column="match"/>
         <result property="userId" column="user_id"/>
         <result property="name" column="name"/>
@@ -39,13 +39,13 @@
             academy_registration_id = #{academyRegistrationId}
     </delete>
 
-    <select id="getAwaitingAcademies" resultMap="academyMap">
+    <select id="getAwaitingAcademies" resultMap="academyRegistrationMap">
         select
             art.academy_registration_id,
-            art.aca_asnum,
-            art.aca_nm,
-            art.admst_zone_nm,
-            art.atpt_ofcdc_sc_code,
+            art.ACADEMY_ID,
+            at.ACA_ASNUM,
+            at.ACA_NM,
+            at.ADMST_ZONE_NM,
             art.match,
             art.user_id,
             ut.name,
@@ -54,6 +54,7 @@
             art.operation_registration_file
         from
             academy_registration_tb art
+                left outer join academy_tb at on(at.ACADEMY_ID = art.ACADEMY_ID)
                 left outer join user_tb ut on(ut.user_id = art.user_id)
         where
             art.approval_status = 0
