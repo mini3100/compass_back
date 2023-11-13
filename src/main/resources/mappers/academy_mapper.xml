@@ -76,11 +76,7 @@
             and ACA_ASNUM = #{acaAsnum}
         </if>
         <if test="acaNm!=null and !acaNm.equals('')">
-<<<<<<< HEAD
             and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
-=======
-            and ACA_NM like concat("%",#{acaNm},"%")
->>>>>>> origin/요청-경로-수정api-대신-db사용-#32
         </if>
         <if test="realmScNm!=null and !realmScNm.equals('')">
             and REALM_SC_NM = #{realmScNm}
