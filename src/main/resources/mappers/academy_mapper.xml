@@ -76,7 +76,7 @@
             and ACA_ASNUM = #{acaAsnum}
         </if>
         <if test="acaNm!=null and !acaNm.equals('')">
-            and ACA_NM = #{acaNm}
+            and ACA_NM like concat("%",#{acaNm},"%")
         </if>
         <if test="realmScNm!=null and !realmScNm.equals('')">
             and REALM_SC_NM = #{realmScNm}
@@ -94,10 +94,7 @@
         insert into academy_registration_tb
         values(
             0,
-            #{acaAsnum},
-            #{acaNm},
-            #{admstZoneNm},
-            #{atptOfcdcScCode},
+            #{academyId},
             #{match},
             #{userId},
             #{businessRegistrationFile},
@@ -119,7 +116,6 @@
         from
         	academy_registration_tb
         where
-        	aca_asnum = #{acaAsnum} and
-            atpt_ofcdc_sc_code = #{atptOfcdcScCode};
+        	ACADEMY_ID = #{academyId};
     </select>
 </mapper>

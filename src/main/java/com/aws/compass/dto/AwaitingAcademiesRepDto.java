@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class AwaitingAcademiesRepDto {
     private int academyRegistrationId;
+    private int academyId;
     private String acaAsnum;
     private String acaNm;
     private String admstZoneNm;
-    private String atptOfcdcScCode;
     private String match;
     private int userId;
     private String name;
