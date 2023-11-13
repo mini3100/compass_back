@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class SearchAcademysReqDto {
+    private int ACADEMY_ID;
     private int pIndex;
     private int pSize;
     private String ATPT_OFCDC_SC_CODE;

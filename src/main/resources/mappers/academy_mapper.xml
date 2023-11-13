@@ -118,4 +118,15 @@
         where
         	ACADEMY_ID = #{academyId};
     </select>
+    <select id="getAcademy" resultType="com.aws.compass.entity.Academy">
+        select
+            ACADEMY_ID,
+            ACA_NM,
+            FA_RDNMA,
+            FA_RDNDA
+        from
+            academy_tb
+        where
+            ACADEMY_ID = #{ACADEMY_ID}
+    </select>
 </mapper>
