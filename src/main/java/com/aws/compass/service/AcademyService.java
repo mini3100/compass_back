@@ -39,7 +39,7 @@ public class AcademyService {
         return academyMapper.updateAcademyRegist(academyRegistration) > 0;
     }
 
-    public AcademyInfoRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
+    public AcademyListRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
         return new AcademyListRespDto(listTotalCount, academies);

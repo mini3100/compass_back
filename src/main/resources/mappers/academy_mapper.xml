@@ -187,4 +187,15 @@
             user_id = #{userId}
             and art.approval_status &lt; 1
     </select>
+    <select id="getAcademy" resultType="com.aws.compass.entity.Academy">
+        select
+           at.ACADEMY_ID,
+           at.ACA_NM,
+           at.FA_RDNMA,
+           at.FA_RDNDA
+        from
+           academy_tb at
+        where
+            at.ACADEMY_ID = #{ACADEMY_ID}
+    </select>
 </mapper>
