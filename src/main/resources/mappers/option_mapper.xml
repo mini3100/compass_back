@@ -25,6 +25,14 @@
         <id property="categoryDetailValue" column="category_detail_value" />
         <id property="categoryDetailName" column="category_detail_name" />
     </resultMap>
+    <resultMap id="convenienceMap" type="com.aws.compass.entity.Convenience">
+        <id property="convenienceId" column="convenience_id" />
+        <id property="convenienceName" column="convenience_name" />
+    </resultMap>
+    <resultMap id="ageMap" type="com.aws.compass.entity.Age">
+        <id property="ageId" column="age_id" />
+        <id property="ageRange" column="age_range" />
+    </resultMap>
 
 
     <select id="getEducationOfficeList" resultMap="educationOfficeMap">
@@ -61,6 +69,20 @@
             category_detail_name
         from
             category_detail_tb
+    </select>
+    <select id="getConvenienceList" resultMap="convenienceMap">
+        select
+            convenience_id,
+            convenience_name
+        from
+            convenience_tb
+    </select>
+    <select id="getAgeList" resultMap="ageMap">
+        select
+            age_id,
+            age_range
+        from
+            age_tb
     </select>
 
 </mapper>

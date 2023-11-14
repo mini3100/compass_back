@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,8 @@ public class AcademySearchVo {
     private String realmScNm;
     private String leOrdNm;
     private String leCrseNm;
+//    private List<String> convenienceIds;
+//    private int convenienceCount;
     private int index;
     private int pSize;
 }
