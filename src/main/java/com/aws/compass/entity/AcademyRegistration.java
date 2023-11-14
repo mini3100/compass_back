@@ -23,21 +23,5 @@ public class AcademyRegistration {
     private String idFile;
     private String operationRegistrationFile;
     private int approvalStatus;
-
-    public AwaitingAcademiesRepDto toAwaitingAcademiesDto() {
-        return AwaitingAcademiesRepDto.builder()
-                .academyRegistrationId(academyRegistrationId)
-                .academyId(academyId)
-                .acaAsnum(acaAsnum)
-                .acaNm(acaNm)
-                .admstZoneNm(admstZoneNm)
-                .match(match)
-                .userId(userId)
-                .name(name)
-                .businessRegistrationFile(businessRegistrationFile)
-                .idFile(idFile)
-                .operationRegistrationFile(operationRegistrationFile)
-                .build();
-    }
-
+    private String rejectReason;
 }

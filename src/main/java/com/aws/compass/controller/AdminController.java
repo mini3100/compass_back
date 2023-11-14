@@ -1,6 +1,7 @@
 package com.aws.compass.controller;
 
 import com.aws.compass.dto.ApprovalAcademyReqDto;
+import com.aws.compass.dto.DisapprovalReqDto;
 import com.aws.compass.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +18,13 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getAwaitingAcademies(page));
     }
 
-    @GetMapping("/api/admin/academies/awaiting/count")
-    public ResponseEntity<?> getAwaitingAcademyCount() {
-        return ResponseEntity.ok(adminService.getAwaitingAcademyCount());
-    }
-
     @PutMapping("/api/admin/academy/approval")
     public ResponseEntity<?> approvalAcademy(@RequestBody ApprovalAcademyReqDto approvalAcademyReqDto) {
         return ResponseEntity.ok(adminService.approvalAcademy(approvalAcademyReqDto));
     }
 
-    @DeleteMapping("/api/admin/academy/disapproval/{academyRegistrationId}")
-    public ResponseEntity<?> disapprovalAcademy(@PathVariable int academyRegistrationId) {
-        return ResponseEntity.ok(adminService.disapprovalAcademy(academyRegistrationId));
+    @PutMapping("/api/admin/academy/disapproval")
+    public ResponseEntity<?> disapprovalAcademy(@RequestBody DisapprovalReqDto disapprovalReqDto) {
+        return ResponseEntity.ok(adminService.disapprovalAcademy(disapprovalReqDto));
     }
 }
