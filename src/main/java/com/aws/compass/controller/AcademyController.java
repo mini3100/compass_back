@@ -17,15 +17,27 @@ public class AcademyController {
 
     private final AcademyService academyService;
 
+    //학원 전체 리스트 가져오기
     @GetMapping("/api/academies")
-    public ResponseEntity<?> getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
+    public ResponseEntity<?> getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         System.out.println(searchAcademysReqDto);
         return ResponseEntity.ok(academyService.getAcademies(searchAcademysReqDto));
     }
 
+    //학원 정보 가져오기 (단건)
+    @GetMapping("/api/academy")
+    public ResponseEntity<?> getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
+        System.out.println(searchAcademysReqDto);
+        return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto));
+    }
+
+    //학원 상세 정보 가져오기(단건)
+    @GetMapping("")
+
     @ValidAop
     @PostMapping("/api/academy")
     public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
+        System.out.println(academyService.academyRegist(academyRegistrationReqDto));
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
 

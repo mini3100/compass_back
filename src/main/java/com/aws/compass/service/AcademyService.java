@@ -42,7 +42,11 @@ public class AcademyService {
     public AcademyInfoRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
-        return new AcademyInfoRespDto(listTotalCount, academies);
+        return new AcademyListRespDto(listTotalCount, academies);
+    }
+
+    public Academy getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
+        return academyMapper.getAcademy(searchAcademysReqDto);
     }
 
     public MyAcademiesRespDto getAppliedAcademies(int userId, int page) {
