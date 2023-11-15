@@ -290,11 +290,11 @@
 
     <select id="getConvenienceInfo" resultType="java.lang.String">
         select
-        	ct.convenience_name
+            ct.convenience_name
         from
-            academy_info_tb ait
-        	left outer join academy_convenience_tb act on(act.academy_info_id = ait.academy_info_id)
-        	left outer join convenience_tb ct on(ct.convenience_id = act.convenience_id)
+            academy_convenience_tb act
+            left outer join academy_info_tb ait on(ait.academy_info_id = act.academy_info_id)
+            left outer join convenience_tb ct on(ct.convenience_id = act.convenience_id)
         where
             ait.ACADEMY_ID = #{ACADEMY_ID}
     </select>
@@ -303,8 +303,8 @@
         select
         	agt.age_range
         from
-        	academy_info_tb ait
-            left outer join attendance_age_tb aat on(aat.academy_info_id = ait.academy_info_id)
+            attendance_age_tb aat
+            left outer join academy_info_tb ait on(ait.academy_info_id = aat.academy_info_id)
         	left outer join age_tb agt on(agt.age_id = aat.age_id)
         where
             ait.ACADEMY_ID = #{ACADEMY_ID}
@@ -337,7 +337,7 @@
             art.reject_reason
         from
             academy_registration_tb art
-                left outer join academy_tb at on(at.ACADEMY_ID = art.ACADEMY_ID)
+            left outer join academy_tb at on(at.ACADEMY_ID = art.ACADEMY_ID)
         where
             art.user_id = #{userId}
             and art.approval_status &lt; 1
@@ -346,6 +346,7 @@
             art.academy_registration_id desc
         limit #{index}, 5
     </select>
+
     <select id="getAppliedAcademyCount" resultType="java.lang.Integer">
         select
             count(*)
