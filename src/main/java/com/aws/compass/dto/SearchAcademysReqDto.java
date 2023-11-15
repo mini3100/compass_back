@@ -3,7 +3,9 @@ package com.aws.compass.dto;
 import com.aws.compass.vo.AcademySearchVo;
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class SearchAcademysReqDto {
@@ -16,10 +18,13 @@ public class SearchAcademysReqDto {
     private String REALM_SC_NM;
     private String LE_ORD_NM;
     private String LE_CRSE_NM;
-    private List<String> convenienceIds;
-    private int convenienceCount;
+    private List<Integer> ageIds;
+    private int countAgeId;
+    private List<Integer> convenienceIds;
+    private int countConvenienceId;
 
     public AcademySearchVo toVo() {
+
         return AcademySearchVo.builder()
                 .index((pIndex - 1) * pSize)
                 .pSize(pSize)
@@ -30,8 +35,11 @@ public class SearchAcademysReqDto {
                 .realmScNm(REALM_SC_NM)
                 .leOrdNm(LE_ORD_NM)
                 .leCrseNm(LE_CRSE_NM)
-//                .convenienceIds(convenienceIds)
-//                .convenienceCount(convenienceCount)
+                .ageIds(ageIds)
+                .countAgeId(countAgeId)
+                .convenienceIds(convenienceIds)
+                .countConvenienceId(countConvenienceId)
                 .build();
     }
+
 }

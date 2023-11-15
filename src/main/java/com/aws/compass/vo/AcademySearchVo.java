@@ -19,8 +19,10 @@ public class AcademySearchVo {
     private String realmScNm;
     private String leOrdNm;
     private String leCrseNm;
-//    private List<String> convenienceIds;
-//    private int convenienceCount;
+    private List<Integer> ageIds;
+    private int countAgeId;
+    private List<Integer> convenienceIds;
+    private int countConvenienceId;
     private int index;
     private int pSize;
 }

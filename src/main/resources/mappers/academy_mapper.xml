@@ -3,34 +3,100 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aws.compass.repository.AcademyMapper">
+    <resultMap id="academyMap" type="com.aws.compass.entity.Academy">
+        <id property="ACADEMY_ID" column="ACADEMY_ID" />
+        <result property="ATPT_OFCDC_SC_CODE" column="ATPT_OFCDC_SC_CODE" />
+        <result property="ATPT_OFCDC_SC_NM" column="ATPT_OFCDC_SC_NM" />
+        <result property="ADMST_ZONE_NM" column="ADMST_ZONE_NM" />
+        <result property="ACA_INSTI_SC_NM" column="ACA_INSTI_SC_NM" />
+        <result property="ACA_ASNUM" column="ACA_ASNUM" />
+        <result property="ACA_NM" column="ACA_NM" />
+        <result property="ESTBL_YMD" column="ESTBL_YMD" />
+        <result property="REG_YMD" column="REG_YMD" />
+        <result property="REG_STTUS_NM" column="REG_STTUS_NM" />
+        <result property="CAA_BEGIN_YMD" column="CAA_BEGIN_YMD" />
+        <result property="CAA_END_YMD" column="CAA_END_YMD" />
+        <result property="TOFOR_SMTOT" column="TOFOR_SMTOT" />
+        <result property="DTM_RCPTN_ABLTY_NMPR_SMTOT" column="DTM_RCPTN_ABLTY_NMPR_SMTOT" />
+        <result property="REALM_SC_NM" column="REALM_SC_NM" />
+        <result property="LE_ORD_NM" column="LE_ORD_NM" />
+        <result property="LE_CRSE_LIST_NM" column="LE_CRSE_LIST_NM" />
+        <result property="LE_CRSE_NM" column="LE_CRSE_NM" />
+        <result property="PSNBY_THCC_CNTNT" column="PSNBY_THCC_CNTNT" />
+        <result property="THCC_OTHBC_YN" column="THCC_OTHBC_YN" />
+        <result property="BRHS_ACA_YN" column="BRHS_ACA_YN" />
+        <result property="FA_RDNMA" column="FA_RDNMA" />
+        <result property="FA_RDNDA" column="FA_RDNDA" />
+        <result property="FA_RDNZC" column="FA_RDNZC" />
+        <result property="FA_TELNO" column="FA_TELNO" />
+        <result property="LOAD_DTM" column="LOAD_DTM" />
+    </resultMap>
 
     <select id="getListTotalCount" resultType="int" parameterType="com.aws.compass.vo.AcademySearchVo">
         select
             count(*)
-        from
+        FROM
             academy_tb
-        where
+        WHERE
             1 = 1
-            <if test="atptOfcdcScCode!=null and !atptOfcdcScCode.equals('')">
-                and ATPT_OFCDC_SC_CODE = #{atptOfcdcScCode}
+            <if test="atptOfcdcScCode != null and !atptOfcdcScCode.equals('')">
+                AND ATPT_OFCDC_SC_CODE = #{atptOfcdcScCode}
             </if>
-            <if test="admstZoneNm!=null and !admstZoneNm.equals('')">
-                and ADMST_ZONE_NM = #{admstZoneNm}
+            <if test="admstZoneNm != null and !admstZoneNm.equals('')">
+                AND ADMST_ZONE_NM = #{admstZoneNm}
             </if>
-            <if test="acaAsnum!=null and !acaAsnum.equals('')">
-                and ACA_ASNUM = #{acaAsnum}
+            <if test="acaAsnum != null and !acaAsnum.equals('')">
+                AND ACA_ASNUM = #{acaAsnum}
             </if>
-            <if test="acaNm!=null and !acaNm.equals('')">
-                and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
+            <if test="acaNm != null and !acaNm.equals('')">
+                AND ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
             </if>
-            <if test="realmScNm!=null and !realmScNm.equals('')">
-                and REALM_SC_NM = #{realmScNm}
+            <if test="realmScNm != null and !realmScNm.equals('')">
+                AND REALM_SC_NM = #{realmScNm}
             </if>
-            <if test="leOrdNm!=null and !leOrdNm.equals('')">
-                and LE_ORD_NM = #{leOrdNm}
+            <if test="leOrdNm != null and !leOrdNm.equals('')">
+                AND LE_ORD_NM = #{leOrdNm}
             </if>
-            <if test="leCrseNm!=null and !leCrseNm.equals('')">
-                and LE_CRSE_NM = #{leCrseNm}
+            <if test="leCrseNm != null and !leCrseNm.equals('')">
+                AND LE_CRSE_NM = #{leCrseNm}
+            </if>
+            <if test="ageIds != null and !ageIds.isEmpty()">
+                AND ACADEMY_ID IN (
+                    SELECT
+                        ait.ACADEMY_ID
+                    FROM
+                        academy_tb at
+                        LEFT OUTER JOIN academy_info_tb ait ON ait.ACADEMY_ID = at.ACADEMY_ID
+                        LEFT OUTER JOIN attendance_age_tb aat ON aat.academy_info_id = ait.academy_info_id
+                    WHERE
+                        aat.age_id IN
+                        <foreach collection="ageIds" item="ageId" open="(" separator="," close=")">
+                            #{ageId}
+                        </foreach>
+                    GROUP BY
+                        ait.ACADEMY_ID
+                    HAVING
+                        COUNT(DISTINCT aat.age_id) = #{countAgeId}
+                )
+            </if>
+            <if test="convenienceIds != null and !convenienceIds.isEmpty()">
+                AND ACADEMY_ID IN (
+                    SELECT
+                        ait.ACADEMY_ID
+                    FROM
+                        academy_tb at
+                        LEFT OUTER JOIN academy_info_tb ait ON ait.ACADEMY_ID = at.ACADEMY_ID
+                        LEFT OUTER JOIN academy_convenience_tb act ON act.academy_info_id = ait.academy_info_id
+                    WHERE
+                        act.convenience_id IN
+                        <foreach collection="convenienceIds" item="convenienceId" open="(" separator="," close=")">
+                            #{convenienceId}
+                        </foreach>
+                    GROUP BY
+                        ait.ACADEMY_ID
+                    HAVING
+                        COUNT(DISTINCT act.convenience_id) = #{countConvenienceId}
+                )
             </if>
     </select>
 
@@ -64,30 +130,68 @@
             LOAD_DTM
         FROM
             academy_tb
-        where
+        WHERE
             1 = 1
-        <if test="atptOfcdcScCode!=null and !atptOfcdcScCode.equals('')">
-            and ATPT_OFCDC_SC_CODE = #{atptOfcdcScCode}
-        </if>
-        <if test="admstZoneNm!=null and !admstZoneNm.equals('')">
-            and ADMST_ZONE_NM = #{admstZoneNm}
-        </if>
-        <if test="acaAsnum!=null and !acaAsnum.equals('')">
-            and ACA_ASNUM = #{acaAsnum}
-        </if>
-        <if test="acaNm!=null and !acaNm.equals('')">
-            and ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
-        </if>
-        <if test="realmScNm!=null and !realmScNm.equals('')">
-            and REALM_SC_NM = #{realmScNm}
-        </if>
-        <if test="leOrdNm!=null and !leOrdNm.equals('')">
-            and LE_ORD_NM = #{leOrdNm}
-        </if>
-        <if test="leCrseNm!=null and !leCrseNm.equals('')">
-            and LE_CRSE_NM = #{leCrseNm}
-        </if>
-        limit #{index}, #{pSize}
+            <if test="atptOfcdcScCode != null and !atptOfcdcScCode.equals('')">
+                AND ATPT_OFCDC_SC_CODE = #{atptOfcdcScCode}
+            </if>
+            <if test="admstZoneNm != null and !admstZoneNm.equals('')">
+                AND ADMST_ZONE_NM = #{admstZoneNm}
+            </if>
+            <if test="acaAsnum != null and !acaAsnum.equals('')">
+                AND ACA_ASNUM = #{acaAsnum}
+            </if>
+            <if test="acaNm != null and !acaNm.equals('')">
+                AND ACA_NM LIKE CONCAT('%', #{acaNm}, '%')
+            </if>
+            <if test="realmScNm != null and !realmScNm.equals('')">
+                AND REALM_SC_NM = #{realmScNm}
+            </if>
+            <if test="leOrdNm != null and !leOrdNm.equals('')">
+                AND LE_ORD_NM = #{leOrdNm}
+            </if>
+            <if test="leCrseNm != null and !leCrseNm.equals('')">
+                AND LE_CRSE_NM = #{leCrseNm}
+            </if>
+            <if test="ageIds != null and !ageIds.isEmpty()">
+                AND ACADEMY_ID IN (
+                    SELECT
+                        ait.ACADEMY_ID
+                    FROM
+                        academy_tb at
+                        LEFT OUTER JOIN academy_info_tb ait ON ait.ACADEMY_ID = at.ACADEMY_ID
+                        LEFT OUTER JOIN attendance_age_tb aat ON aat.academy_info_id = ait.academy_info_id
+                    WHERE
+                        aat.age_id IN
+                <foreach collection="ageIds" item="ageId" open="(" separator="," close=")">
+                    #{ageId}
+                </foreach>
+                GROUP BY
+                ait.ACADEMY_ID
+                HAVING
+                COUNT(DISTINCT aat.age_id) = #{countAgeId}
+                )
+            </if>
+            <if test="convenienceIds != null and !convenienceIds.isEmpty()">
+                AND ACADEMY_ID IN (
+                    SELECT
+                        ait.ACADEMY_ID
+                    FROM
+                        academy_tb at
+                        LEFT OUTER JOIN academy_info_tb ait ON ait.ACADEMY_ID = at.ACADEMY_ID
+                        LEFT OUTER JOIN academy_convenience_tb act ON act.academy_info_id = ait.academy_info_id
+                    WHERE
+                        act.convenience_id IN
+                        <foreach collection="convenienceIds" item="convenienceId" open="(" separator="," close=")">
+                            #{convenienceId}
+                        </foreach>
+                    GROUP BY
+                        ait.ACADEMY_ID
+                    HAVING
+                        COUNT(DISTINCT act.convenience_id) = #{countConvenienceId}
+                )
+            </if>
+        LIMIT #{index}, #{pSize}
     </select>
 
     <insert id="academyRegist" parameterType="com.aws.compass.entity.AcademyRegistration">

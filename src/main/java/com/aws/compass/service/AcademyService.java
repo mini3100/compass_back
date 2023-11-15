@@ -34,6 +34,7 @@ public class AcademyService {
 
     public AcademyInfoRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
+        System.out.println("searchAcademysReqVo()" + searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
         return new AcademyInfoRespDto(listTotalCount, academies);
     }
