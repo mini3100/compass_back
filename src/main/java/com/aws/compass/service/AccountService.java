@@ -1,12 +1,12 @@
 package com.aws.compass.service;
 
 import com.aws.compass.dto.EditUserReqDto;
+import com.aws.compass.entity.Academy;
 import com.aws.compass.entity.User;
 import com.aws.compass.exception.AuthMailException;
 import com.aws.compass.exception.SendMailException;
 import com.aws.compass.jwt.JwtProvider;
 import com.aws.compass.repository.AccountMapper;
-import com.aws.compass.repository.AuthMapper;
 import com.aws.compass.security.PrincipalUser;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.MimeMessage;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -94,5 +97,25 @@ public class AccountService {
         }
 
         return accountMapper.updateEnabledToEmail(email) > 0;
+    }
+
+    public boolean getLikeState(int userId, int academyId) {
+        return accountMapper.getLikeState(userId, academyId) > 0;
+    }
+
+    public boolean setLike(int userId, int academyId) {
+        return accountMapper.insertLike(userId, academyId) > 0;
+    }
+
+    public boolean cancelLike(int userId, int academyId) {
+        return accountMapper.deleteLike(userId, academyId) > 0;
+    }
+
+    public int getLikeCount(int userId) {
+        return accountMapper.getLikeCountByUserId(userId);
+    }
+
+    public List<Academy> getLikeAcademy(int userId) {
+        return accountMapper.getLikeAcademies(userId);
     }
 }

@@ -42,4 +42,5 @@ public class AcademyController {
         System.out.println(academyService.academyRegist(academyRegistrationReqDto));
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
+
 }
