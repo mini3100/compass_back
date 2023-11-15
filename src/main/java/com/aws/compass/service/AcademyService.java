@@ -41,6 +41,7 @@ public class AcademyService {
 
     public AcademyListRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
+        System.out.println("searchAcademysReqVo()" + searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
         return new AcademyListRespDto(listTotalCount, academies);
     }
@@ -54,11 +55,20 @@ public class AcademyService {
         return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
     }
 
-    public MyAcademiesRespDto getAppliedAcademies(int userId, int page) {
+    public AppliedAcademiesRespDto getAppliedAcademies(int userId, int page) {
         int index = (page - 1) * 5;
 
         List<AcademyRegistration> academyRegistrations = academyMapper.getAppliedAcademyRegistrations(userId, index);
         int listTotalCount = academyMapper.getAppliedAcademyCount(userId);
+
+        return new AppliedAcademiesRespDto(academyRegistrations, listTotalCount);
+    }
+
+    public MyAcademiesRespDto getMyAcademies(int userId, int page) {
+        int index = (page - 1) * 5;
+
+        List<AcademyRegistration> academyRegistrations = academyMapper.getMyAcademyRegistrations(userId, index);
+        int listTotalCount = academyMapper.getMyAcademyCount(userId);
 
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }

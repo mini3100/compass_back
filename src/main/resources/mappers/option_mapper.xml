@@ -6,24 +6,32 @@
 
     <resultMap id="educationOfficeMap" type="com.aws.compass.entity.EducationOffice">
         <id property="educationOfficeId" column="education_office_id" />
-        <id property="educationOfficeName" column="education_office_name" />
-        <id property="educationOfficeCode" column="education_office_code" />
+        <result property="educationOfficeName" column="education_office_name" />
+        <result property="educationOfficeCode" column="education_office_code" />
     </resultMap>
     <resultMap id="administrativeDistrictMap" type="com.aws.compass.entity.AdministrativeDistrict">
         <id property="administrativeDistrictId" column="administrative_district_id" />
-        <id property="educationOfficeCode" column="education_office_code" />
-        <id property="administrativeDistrictName" column="administrative_district_name" />
+        <result property="educationOfficeCode" column="education_office_code" />
+        <result property="administrativeDistrictName" column="administrative_district_name" />
     </resultMap>
     <resultMap id="categoryMap" type="com.aws.compass.entity.Category">
         <id property="categoryId" column="category_id" />
-        <id property="categoryValue" column="category_value" />
-        <id property="categoryName" column="category_name" />
+        <result property="categoryValue" column="category_value" />
+        <result property="categoryName" column="category_name" />
     </resultMap>
     <resultMap id="categoryDetailMap" type="com.aws.compass.entity.CategoryDetail">
         <id property="categoryDetailId" column="category_detail_id" />
-        <id property="categoryValue" column="category_value" />
-        <id property="categoryDetailValue" column="category_detail_value" />
-        <id property="categoryDetailName" column="category_detail_name" />
+        <result property="categoryValue" column="category_value" />
+        <result property="categoryDetailValue" column="category_detail_value" />
+        <result property="categoryDetailName" column="category_detail_name" />
+    </resultMap>
+    <resultMap id="convenienceMap" type="com.aws.compass.entity.Convenience">
+        <id property="convenienceId" column="convenience_id" />
+        <result property="convenienceName" column="convenience_name" />
+    </resultMap>
+    <resultMap id="ageMap" type="com.aws.compass.entity.Age">
+        <id property="ageId" column="age_id" />
+        <result property="ageRange" column="age_range" />
     </resultMap>
 
 
@@ -61,6 +69,20 @@
             category_detail_name
         from
             category_detail_tb
+    </select>
+    <select id="getConvenienceList" resultMap="convenienceMap">
+        select
+            convenience_id,
+            convenience_name
+        from
+            convenience_tb
+    </select>
+    <select id="getAgeList" resultMap="ageMap">
+        select
+            age_id,
+            age_range
+        from
+            age_tb
     </select>
 
 </mapper>

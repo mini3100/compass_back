@@ -34,5 +34,14 @@ public class OptionsController {
         return  ResponseEntity.ok(optionService.getCategoryDetailList());
     }
 
+    @GetMapping("/conveniences")
+    public ResponseEntity<?> getConvenienceOptions() {
+        return ResponseEntity.ok(optionService.getConvenienceList());
+    }
+
+    @GetMapping("/ages")
+    public ResponseEntity<?> getAgeOptions() {
+        return ResponseEntity.ok(optionService.getAgeList());
+    }
 
 }

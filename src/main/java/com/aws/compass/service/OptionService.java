@@ -1,9 +1,6 @@
 package com.aws.compass.service;
 
-import com.aws.compass.dto.AdministrativeDistrictRespDto;
-import com.aws.compass.dto.CategoryDetailRespDto;
-import com.aws.compass.dto.CategoryRespDto;
-import com.aws.compass.dto.EducationOfficeRespDto;
+import com.aws.compass.dto.*;
 import com.aws.compass.entity.AdministrativeDistrict;
 import com.aws.compass.repository.OptionMapper;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +36,17 @@ public class OptionService {
         List<CategoryDetailRespDto> categoryDetailRespDtos = new ArrayList<>();
         optionMapper.getCategoryDetailList().forEach(categoryDetail -> categoryDetailRespDtos.add(categoryDetail.toCategoryDetailDto()));
         return categoryDetailRespDtos;
+    }
+
+    public List<ConvenienceRespDto> getConvenienceList() {
+        List<ConvenienceRespDto> convenienceRespDtos = new ArrayList<>();
+        optionMapper.getConvenienceList().forEach(convenience -> convenienceRespDtos.add(convenience.toConvenienceDto()));
+        return convenienceRespDtos;
+    }
+
+    public List<AgeRespDto> getAgeList() {
+        List<AgeRespDto> ageRespDtos = new ArrayList<>();
+        optionMapper.getAgeList().forEach(age -> ageRespDtos.add(age.toAgeDto()));
+        return ageRespDtos;
     }
 }
