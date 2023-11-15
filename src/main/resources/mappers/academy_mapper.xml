@@ -208,8 +208,8 @@
             cit.class_name,
             cit.class_price
         from
-            academy_info_tb ait
-            left outer join class_info_tb cit on(cit.academy_info_id = ait.academy_info_id)
+            class_info_tb cit
+            left outer join academy_info_tb ait on(ait.academy_info_id = cit.academy_info_id)
         where
             ait.ACADEMY_ID = #{ACADEMY_ID}
     </select>
