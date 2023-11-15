@@ -142,6 +142,15 @@
             lt.user_id = #{userId}
 
     </select>
+    <select id="getLikeCountByAcademyId"
+            resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            like_tb
+        where
+            academy_id = #{academyId}
+    </select>
 
 
     <!--    <select id="getLikeAcademiesByUserId"-->

@@ -24,7 +24,8 @@
             #{nickname},
             #{phone},
             #{provider},
-            0
+            0,
+            1
         )
     </insert>
 
