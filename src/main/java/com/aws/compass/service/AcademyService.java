@@ -1,10 +1,13 @@
 package com.aws.compass.service;
 
+import com.aws.compass.dto.AcademyInfoRespDto;
 import com.aws.compass.dto.AcademyListRespDto;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.entity.Academy;
+import com.aws.compass.entity.AcademyInfo;
 import com.aws.compass.entity.AcademyRegistration;
+import com.aws.compass.entity.ClassInfo;
 import com.aws.compass.exception.AcademyException;
 import com.aws.compass.repository.AcademyMapper;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +41,14 @@ public class AcademyService {
         return new AcademyListRespDto(listTotalCount, academies);
     }
 
-    public Academy getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
-        return academyMapper.getAcademy(searchAcademysReqDto);
+    public AcademyInfoRespDto getAcademy(int ACADEMY_ID) {
+        Academy academy = academyMapper.getAcademy(ACADEMY_ID);
+        AcademyInfo academyInfo  = academyMapper.getAcademyInfo(ACADEMY_ID);
+        List<String> convenienceInfo = academyMapper.getConvenienceInfo(ACADEMY_ID);
+        List<String> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
+        List<ClassInfo> classInfo = academyMapper.getClassInfo(ACADEMY_ID);
+        System.out.println(classInfo);
+        return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
     }
 }
 

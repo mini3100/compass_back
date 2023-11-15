@@ -30,12 +30,10 @@ public class AcademyController {
     @GetMapping("/api/academy")
     public ResponseEntity<?> getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
         System.out.println(searchAcademysReqDto);
-        return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto));
+        return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto.getACADEMY_ID()));
     }
 
-    //학원 상세 정보 가져오기(단건)
-    @GetMapping("")
-
+    //학원 등록하기
     @ValidAop
     @PostMapping("/api/academy")
     public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {

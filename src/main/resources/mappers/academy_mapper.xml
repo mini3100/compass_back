@@ -118,15 +118,65 @@
         where
         	ACADEMY_ID = #{academyId};
     </select>
+
     <select id="getAcademy" resultType="com.aws.compass.entity.Academy">
         select
-            ACADEMY_ID,
-            ACA_NM,
-            FA_RDNMA,
-            FA_RDNDA
+        	at.ACADEMY_ID,
+        	at.ACA_NM,
+        	at.FA_RDNMA,
+        	at.FA_RDNDA,
+            at.REALM_SC_NM,
+            at.LE_CRSE_LIST_NM
         from
-            academy_tb
+        	academy_tb at
         where
-            ACADEMY_ID = #{ACADEMY_ID}
+            at.ACADEMY_ID = #{ACADEMY_ID}
+    </select>
+
+    <select id="getAcademyInfo" resultType="com.aws.compass.entity.AcademyInfo">
+        select
+        	ait.logo_img,
+        	ait.class_size,
+        	ait.course_period,
+        	ait.purpose,
+        	ait.home_page,
+        	ait.phone
+        from
+        	academy_info_tb ait
+        where
+            ait.ACADEMY_ID = #{ACADEMY_ID}
+    </select>
+
+    <select id="getConvenienceInfo" resultType="java.lang.String">
+        select
+        	ct.convenience_name
+        from
+            academy_info_tb ait
+        	left outer join academy_convenience_tb act on(act.academy_info_id = ait.academy_info_id)
+        	left outer join convenience_tb ct on(ct.convenience_id = act.convenience_id)
+        where
+            ait.ACADEMY_ID = #{ACADEMY_ID}
+    </select>
+
+    <select id="getAgeRange" resultType="java.lang.String">
+        select
+        	agt.age_range
+        from
+        	academy_info_tb ait
+            left outer join attendance_age_tb aat on(aat.academy_info_id = ait.academy_info_id)
+        	left outer join age_tb agt on(agt.age_id = aat.age_id)
+        where
+            ait.ACADEMY_ID = #{ACADEMY_ID}
+    </select>
+
+    <select id="getClassInfo" resultType="com.aws.compass.entity.ClassInfo">
+        select
+            cit.class_name,
+            cit.class_price
+        from
+            academy_info_tb ait
+            left outer join class_info_tb cit on(cit.academy_info_id = ait.academy_info_id)
+        where
+            ait.ACADEMY_ID = #{ACADEMY_ID}
     </select>
 </mapper>
