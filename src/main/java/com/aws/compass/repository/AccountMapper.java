@@ -18,7 +18,9 @@ public interface AccountMapper {
     public int getLikeState(int userId, int academyId);
     public int insertLike(int userId, int academyId);
     public int deleteLike(int userId, int academyId);
-    public int getLikeCountByUserId(int userId);
 
+    public int getLikeCountByUserId(int userId);
     public List<Academy> getLikeAcademies(int userId);
+
+    public int getLikeCountByAcademyId(int academyId);
 }

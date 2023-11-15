@@ -51,7 +51,7 @@ public class AccountController {
 
     @GetMapping("/api/account/like/{academyId}/{userId}")
     public ResponseEntity<?> getLikeState (@PathVariable int userId, @PathVariable int academyId) {
-        System.out.println("aca"+academyId);
+        System.out.println(academyId);
         return ResponseEntity.ok(accountService.getLikeState(userId, academyId));
     }
 
@@ -73,5 +73,10 @@ public class AccountController {
     @GetMapping("/api/account/mypage/like/{userId}")
     public ResponseEntity<?> getLikeAcademies(@PathVariable int userId) {
         return ResponseEntity.ok(accountService.getLikeAcademy(userId));
+    }
+
+    @GetMapping("/api/account/info/like/count/{academyId}")
+    public ResponseEntity<?> getLikeCountOfInfo(@PathVariable int academyId) {
+        return ResponseEntity.ok(accountService.getLikeInfoCount(academyId));
     }
 }
