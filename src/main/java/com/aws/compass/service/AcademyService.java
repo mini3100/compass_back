@@ -23,8 +23,6 @@ public class AcademyService {
     public boolean academyRegist(AcademyRegistrationReqDto academyRegistrationReqDto) {
         AcademyRegistration academyRegistration = academyRegistrationReqDto.toAcademyRegist();
 
-        System.out.println("service:" + academyRegistration);
-
         int errorCode = academyMapper.academyDuplicate(academyRegistration);
         System.out.println(errorCode);
         if(errorCode > 0) {
@@ -53,7 +51,6 @@ public class AcademyService {
         List<String> convenienceInfo = academyMapper.getConvenienceInfo(ACADEMY_ID);
         List<String> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
         List<ClassInfo> classInfo = academyMapper.getClassInfo(ACADEMY_ID);
-        System.out.println(classInfo);
         return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
     }
 
@@ -64,6 +61,11 @@ public class AcademyService {
         int listTotalCount = academyMapper.getAppliedAcademyCount(userId);
 
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
+    }
+
+    public ReviewRespDto getAcademyReviews(int academyId) {
+        System.out.println(academyMapper.getAcademyReviews(academyId));
+        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId));
     }
 }
 
