@@ -315,8 +315,8 @@
             cit.class_name,
             cit.class_price
         from
-            academy_info_tb ait
-            left outer join class_info_tb cit on(cit.academy_info_id = ait.academy_info_id)
+            class_info_tb cit
+            left outer join academy_info_tb ait on(ait.academy_info_id = cit.academy_info_id)
         where
             ait.ACADEMY_ID = #{ACADEMY_ID}
     </select>
@@ -355,6 +355,7 @@
             user_id = #{userId}
             and art.approval_status &lt; 1
     </select>
+
     <select id="getMyAcademyRegistrations" resultMap="academyRegistrationMap" parameterType="map">
         select
             art.academy_registration_id,
@@ -389,4 +390,18 @@
             and art.approval_status = 1
     </select>
 
+    <select id="getAcademyReviews" resultType="com.aws.compass.entity.Review">
+        select
+        	rt.review_id,
+            rt.ACADEMY_ID,
+            rt.user_id,
+            rt.score,
+            rt.review_content,
+            ut.nickname
+        from
+        	review_tb rt
+            left outer join user_tb ut on(ut.user_id = rt.user_id)
+        where
+        	rt.ACADEMY_ID = #{academyId};
+    </select>
 </mapper>

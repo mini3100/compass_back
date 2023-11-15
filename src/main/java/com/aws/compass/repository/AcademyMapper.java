@@ -1,10 +1,7 @@
 package com.aws.compass.repository;
 
 import com.aws.compass.dto.SearchAcademysReqDto;
-import com.aws.compass.entity.Academy;
-import com.aws.compass.entity.AcademyInfo;
-import com.aws.compass.entity.AcademyRegistration;
-import com.aws.compass.entity.ClassInfo;
+import com.aws.compass.entity.*;
 import com.aws.compass.vo.AcademySearchVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -26,4 +23,5 @@ public interface AcademyMapper {
     public int getAppliedAcademyCount(int userId);
     public List<AcademyRegistration> getMyAcademyRegistrations(int userId, int index);
     public int getMyAcademyCount(int userId);
+    public List<Review> getAcademyReviews(int academyId);
 }
