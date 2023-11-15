@@ -2,6 +2,8 @@ package com.aws.compass.service;
 
 import com.aws.compass.dto.ApprovalAcademyReqDto;
 import com.aws.compass.dto.AwaitingAcademiesRepDto;
+import com.aws.compass.dto.DisapprovalReqDto;
+import com.aws.compass.entity.AcademyRegistration;
 import com.aws.compass.repository.AdminMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,18 +18,13 @@ public class AdminService {
 
     private final AdminMapper adminMapper;
 
-    public List<AwaitingAcademiesRepDto> getAwaitingAcademies(int page) {
+    public AwaitingAcademiesRepDto getAwaitingAcademies(int page) {
         int index = (page - 1) * 5;
 
-        List<AwaitingAcademiesRepDto> awaitingAcademiesRepDto = new ArrayList<>();
-        adminMapper.getAwaitingAcademies(index).forEach(academy -> {
-            awaitingAcademiesRepDto.add(academy.toAwaitingAcademiesDto());
-        });
-        return awaitingAcademiesRepDto;
-    }
+        List<AcademyRegistration> academyRegistrations = adminMapper.getAcademyRegistrations(index);
+        int listTotalCount = adminMapper.getAwaitingAcademyCount();
 
-    public int getAwaitingAcademyCount() {
-        return adminMapper.getAwaitingAcademyCount();
+        return new AwaitingAcademiesRepDto(academyRegistrations, listTotalCount);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -37,7 +34,7 @@ public class AdminService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean disapprovalAcademy(int academyRegistrationId) {
-        return adminMapper.deleteByAcademyRegistrationId(academyRegistrationId) > 0;
+    public boolean disapprovalAcademy(DisapprovalReqDto disapprovalReqDto) {
+        return adminMapper.updateApprovalStatus(disapprovalReqDto.getAcademyRegistrationId(), disapprovalReqDto.getRejectReason()) > 0;
     }
 }

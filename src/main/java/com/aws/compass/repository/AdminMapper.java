@@ -8,9 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
-    public List<AcademyRegistration> getAwaitingAcademies(int page);
+    public List<AcademyRegistration> getAcademyRegistrations(int page);
     public int getAwaitingAcademyCount();
     public int updateApprovalState(int academyRegistrationId);
     public int updateUserRole(int userId);
-    public int deleteByAcademyRegistrationId(int academyRegistrationId);
+    public int updateApprovalStatus(int academyRegistrationId, String rejectReason);
 }

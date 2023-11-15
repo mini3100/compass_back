@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class AcademySearchVo {
+    private int academyId;
     private String atptOfcdcScCode;
     private String admstZoneNm;
     private String acaAsnum;

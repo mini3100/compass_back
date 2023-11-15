@@ -15,6 +15,10 @@
         <result property="roleId" column="role_id"/>
 
     </resultMap>
+    <insert id="insertLike">
+        insert into like_tb
+        values(0, #{userId}, #{academyId})
+    </insert>
     <update id="updateUser">
         update
             user_tb
@@ -34,6 +38,15 @@
         where
             email = #{email}
     </update>
+    <delete id="deleteLike">
+        delete
+        from
+            like_tb
+        where
+            user_id = #{userId}
+            and ACADEMY_ID = #{academyId}
+
+    </delete>
     <select id="findUserByEmail" resultMap="userMap">
         select
             user_id,
@@ -71,5 +84,74 @@
                 and user_id != #{userId}
             ) as result
     </select>
+
+    <select id="getLikeState"
+            resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            like_tb
+        where
+            user_id = #{userId}
+            and ACADEMY_ID = #{academyId}
+
+    </select>
+
+    <select id="getLikeCountByUserId"
+            resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            like_tb
+        where
+            user_id = #{userId}
+    </select>
+    <select id="getLikeAcademies"
+            resultType="com.aws.compass.entity.Academy">
+        select
+            at.ACADEMY_ID,
+            at.ATPT_OFCDC_SC_CODE,
+            at.ATPT_OFCDC_SC_NM,
+            at.ADMST_ZONE_NM,
+            at.ACA_INSTI_SC_NM,
+            at.ACA_ASNUM,
+            at.ACA_NM,
+            at.ESTBL_YMD,
+            at.REG_YMD,
+            at.REG_STTUS_NM,
+            at.CAA_BEGIN_YMD,
+            at.CAA_END_YMD,
+            at.TOFOR_SMTOT,
+            at.DTM_RCPTN_ABLTY_NMPR_SMTOT,
+            at.REALM_SC_NM,
+            at.LE_ORD_NM,
+            at.LE_CRSE_LIST_NM,
+            at.LE_CRSE_NM,
+            at.PSNBY_THCC_CNTNT,
+            at.THCC_OTHBC_YN,
+            at.BRHS_ACA_YN,
+            at.FA_RDNMA,
+            at.FA_RDNDA,
+            at.FA_RDNZC,
+            at.FA_TELNO,
+            at.LOAD_DTM
+        from
+            like_tb lt
+            left outer join academy_tb at on(at.academy_id = lt.academy_id)
+        where
+            lt.user_id = #{userId}
+
+    </select>
+
+
+    <!--    <select id="getLikeAcademiesByUserId"-->
+<!--            resultType="com.aws.compass.entity.AcademyRegistration">-->
+<!--        select-->
+<!--            aca_nm-->
+<!--        from-->
+<!--            like_tb-->
+<!--        where-->
+<!--            user_id = #{userId}-->
+<!--    </select>-->
 
 </mapper>
