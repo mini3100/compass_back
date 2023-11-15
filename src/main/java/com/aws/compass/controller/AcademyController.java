@@ -7,10 +7,8 @@ import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @RestController
@@ -30,12 +28,10 @@ public class AcademyController {
     @GetMapping("/api/academy")
     public ResponseEntity<?> getAcademy(SearchAcademysReqDto searchAcademysReqDto) {
         System.out.println(searchAcademysReqDto);
-        return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto));
+        return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto.getACADEMY_ID()));
     }
 
-    //학원 상세 정보 가져오기(단건)
-    @GetMapping("")
-
+    //학원 등록하기
     @ValidAop
     @PostMapping("/api/academy")
     public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
@@ -43,4 +39,15 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
 
+    @ValidAop
+    @PutMapping("/api/academy/{academyRegistrationId}")
+    public ResponseEntity<?> updateAcademyRegist(@PathVariable int academyRegistrationId, @Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
+        return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
+    }
+
+
+    @GetMapping("/api/academies/{userId}/{page}")
+    public ResponseEntity<?> getAppliedAcademies(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(academyService.getAppliedAcademies(userId, page));
+    }
 }
