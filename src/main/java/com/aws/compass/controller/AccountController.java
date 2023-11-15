@@ -1,6 +1,7 @@
 package com.aws.compass.controller;
 
 import com.aws.compass.aop.annotation.ValidAop;
+import com.aws.compass.dto.AcademyLikeRespDto;
 import com.aws.compass.dto.EditUserReqDto;
 import com.aws.compass.dto.PrincipalRespDto;
 import com.aws.compass.entity.User;
@@ -46,5 +47,31 @@ public class AccountController {
     public ResponseEntity<?> authenticateMail (String token) {
         //주소의 토큰을 받고 유효한지 확인
         return ResponseEntity.ok(accountService.authenticateMail(token) ? "인증 완료" : "인증 실패");
+    }
+
+    @GetMapping("/api/account/like/{academyId}/{userId}")
+    public ResponseEntity<?> getLikeState (@PathVariable int userId, @PathVariable int academyId) {
+        System.out.println("aca"+academyId);
+        return ResponseEntity.ok(accountService.getLikeState(userId, academyId));
+    }
+
+    @PostMapping("/api/account/like/{academyId}/{userId}")
+    public ResponseEntity<?> setLike(@PathVariable int userId, @PathVariable int academyId) {
+        return ResponseEntity.ok(accountService.setLike(userId, academyId));
+    }
+
+    @DeleteMapping("/api/account/like/{academyId}/{userId}")
+    public ResponseEntity<?> cancelLike(@PathVariable int userId, @PathVariable int academyId) {
+        return ResponseEntity.ok(accountService.cancelLike(userId, academyId));
+    }
+
+    @GetMapping("/api/account/mypage/like/count/{userId}")
+    public ResponseEntity<?> getLikeCount(@PathVariable int userId) {
+        return ResponseEntity.ok(accountService.getLikeCount(userId));
+    }
+
+    @GetMapping("/api/account/mypage/like/{userId}")
+    public ResponseEntity<?> getLikeAcademies(@PathVariable int userId) {
+        return ResponseEntity.ok(accountService.getLikeAcademy(userId));
     }
 }
