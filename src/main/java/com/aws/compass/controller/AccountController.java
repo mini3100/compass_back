@@ -51,7 +51,6 @@ public class AccountController {
 
     @GetMapping("/api/account/like/{academyId}/{userId}")
     public ResponseEntity<?> getLikeState (@PathVariable int userId, @PathVariable int academyId) {
-        System.out.println(academyId);
         return ResponseEntity.ok(accountService.getLikeState(userId, academyId));
     }
 

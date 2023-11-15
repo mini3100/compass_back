@@ -89,7 +89,6 @@ public class AccountService {
         }
 
         String email = claims.get("email").toString();
-        System.out.println(email);
         User user = accountMapper.findUserByEmail(email);
 
         if(user.getEnabled() > 0) { // 이미 인증된 상태

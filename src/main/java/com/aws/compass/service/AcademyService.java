@@ -24,7 +24,6 @@ public class AcademyService {
         AcademyRegistration academyRegistration = academyRegistrationReqDto.toAcademyRegist();
 
         int errorCode = academyMapper.academyDuplicate(academyRegistration);
-        System.out.println(errorCode);
         if(errorCode > 0) {
             throw new AcademyException("이미 등록된 학원입니다.");
         }
@@ -41,7 +40,6 @@ public class AcademyService {
 
     public AcademyListRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
-        System.out.println("searchAcademysReqVo()" + searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
         return new AcademyListRespDto(listTotalCount, academies);
     }
@@ -74,7 +72,6 @@ public class AcademyService {
     }
 
     public ReviewRespDto getAcademyReviews(int academyId) {
-        System.out.println(academyMapper.getAcademyReviews(academyId));
         return new ReviewRespDto(academyMapper.getAcademyReviews(academyId));
     }
 }
