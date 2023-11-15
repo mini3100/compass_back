@@ -7,10 +7,8 @@ import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @RestController
@@ -39,5 +37,17 @@ public class AcademyController {
     public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         System.out.println(academyService.academyRegist(academyRegistrationReqDto));
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
+    }
+
+    @ValidAop
+    @PutMapping("/api/academy/{academyRegistrationId}")
+    public ResponseEntity<?> updateAcademyRegist(@PathVariable int academyRegistrationId, @Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
+        return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
+    }
+
+
+    @GetMapping("/api/academies/{userId}/{page}")
+    public ResponseEntity<?> getAppliedAcademies(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(academyService.getAppliedAcademies(userId, page));
     }
 }

@@ -1,9 +1,6 @@
 package com.aws.compass.service;
 
-import com.aws.compass.dto.AcademyInfoRespDto;
-import com.aws.compass.dto.AcademyListRespDto;
-import com.aws.compass.dto.AcademyRegistrationReqDto;
-import com.aws.compass.dto.SearchAcademysReqDto;
+import com.aws.compass.dto.*;
 import com.aws.compass.entity.Academy;
 import com.aws.compass.entity.AcademyInfo;
 import com.aws.compass.entity.AcademyRegistration;
@@ -13,6 +10,7 @@ import com.aws.compass.repository.AcademyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -35,6 +33,14 @@ public class AcademyService {
         return academyMapper.academyRegist(academyRegistration) > 0;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateAcademyRegist(int academyRegistrationId, AcademyRegistrationReqDto academyRegistrationReqDto) {
+        AcademyRegistration academyRegistration = academyRegistrationReqDto.toAcademyRegist();
+        academyRegistration.setAcademyRegistrationId(academyRegistrationId);
+
+        return academyMapper.updateAcademyRegist(academyRegistration) > 0;
+    }
+
     public AcademyListRespDto getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
         int listTotalCount = academyMapper.getListTotalCount(searchAcademysReqDto.toVo());
         List<Academy> academies = academyMapper.getAcademies(searchAcademysReqDto.toVo());
@@ -49,6 +55,15 @@ public class AcademyService {
         List<ClassInfo> classInfo = academyMapper.getClassInfo(ACADEMY_ID);
         System.out.println(classInfo);
         return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
+    }
+
+    public MyAcademiesRespDto getAppliedAcademies(int userId, int page) {
+        int index = (page - 1) * 5;
+
+        List<AcademyRegistration> academyRegistrations = academyMapper.getAppliedAcademyRegistrations(userId, index);
+        int listTotalCount = academyMapper.getAppliedAcademyCount(userId);
+
+        return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }
 }
 

@@ -14,6 +14,7 @@ import java.util.List;
 public interface AcademyMapper {
     public int academyDuplicate(AcademyRegistration academyRegistration);
     public int academyRegist(AcademyRegistration academyRegistration);
+    public int updateAcademyRegist(AcademyRegistration academyRegistration);
     public List<Academy> getAcademies(AcademySearchVo academySearchVo);
     public Academy getAcademy(int ACADEMY_ID);
     public AcademyInfo getAcademyInfo(int ACADEMY_ID);
@@ -21,5 +22,6 @@ public interface AcademyMapper {
     public List<String> getAgeRange(int ACADEMY_ID);
     public List<ClassInfo> getClassInfo(int ACADEMY_ID);
     public int getListTotalCount(AcademySearchVo academySearchVo);
-
+    public List<AcademyRegistration> getAppliedAcademyRegistrations(int userId, int index);
+    public int getAppliedAcademyCount(int userId);
 }
