@@ -49,11 +49,20 @@ public class AcademyService {
         return academyMapper.getAcademy(searchAcademysReqDto);
     }
 
-    public MyAcademiesRespDto getAppliedAcademies(int userId, int page) {
+    public AppliedAcademiesRespDto getAppliedAcademies(int userId, int page) {
         int index = (page - 1) * 5;
 
         List<AcademyRegistration> academyRegistrations = academyMapper.getAppliedAcademyRegistrations(userId, index);
         int listTotalCount = academyMapper.getAppliedAcademyCount(userId);
+
+        return new AppliedAcademiesRespDto(academyRegistrations, listTotalCount);
+    }
+
+    public MyAcademiesRespDto getMyAcademies(int userId, int page) {
+        int index = (page - 1) * 5;
+
+        List<AcademyRegistration> academyRegistrations = academyMapper.getMyAcademyRegistrations(userId, index);
+        int listTotalCount = academyMapper.getMyAcademyCount(userId);
 
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }

@@ -19,4 +19,6 @@ public interface AcademyMapper {
     public int getListTotalCount(AcademySearchVo academySearchVo);
     public List<AcademyRegistration> getAppliedAcademyRegistrations(int userId, int index);
     public int getAppliedAcademyCount(int userId);
+    public List<AcademyRegistration> getMyAcademyRegistrations(int userId, int index);
+    public int getMyAcademyCount(int userId);
 }

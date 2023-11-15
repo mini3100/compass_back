@@ -47,9 +47,13 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
     }
 
-
-    @GetMapping("/api/academies/{userId}/{page}")
+    @GetMapping("/api/academies/applied/{userId}/{page}")
     public ResponseEntity<?> getAppliedAcademies(@PathVariable int userId, @PathVariable int page) {
         return ResponseEntity.ok(academyService.getAppliedAcademies(userId, page));
+    }
+
+    @GetMapping("/api/academies/{userId}/{page}")
+    public ResponseEntity<?> getMyAcademies(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(academyService.getMyAcademies(userId, page));
     }
 }

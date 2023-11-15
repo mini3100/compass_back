@@ -187,6 +187,39 @@
             user_id = #{userId}
             and art.approval_status &lt; 1
     </select>
+    <select id="getMyAcademyRegistrations" resultMap="academyRegistrationMap" parameterType="map">
+        select
+            art.academy_registration_id,
+            art.ACADEMY_ID,
+            at.ACA_ASNUM,
+            at.ACA_NM,
+            at.ADMST_ZONE_NM,
+            art.match,
+            art.user_id,
+            art.business_registration_file,
+            art.id_file,
+            art.operation_registration_file,
+            art.approval_status,
+            art.reject_reason
+        from
+            academy_registration_tb art
+                left outer join academy_tb at on(at.ACADEMY_ID = art.ACADEMY_ID)
+        where
+            art.user_id = #{userId}
+            and art.approval_status = 1
+        order by
+            art.academy_registration_id desc
+        limit #{index}, 5
+    </select>
+    <select id="getMyAcademyCount" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            academy_registration_tb art
+        where
+            user_id = #{userId}
+            and art.approval_status = 1
+    </select>
     <select id="getAcademy" resultType="com.aws.compass.entity.Academy">
         select
            at.ACADEMY_ID,
