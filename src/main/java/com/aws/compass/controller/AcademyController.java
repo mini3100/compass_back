@@ -58,4 +58,5 @@ public class AcademyController {
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
     }
+    
 }
