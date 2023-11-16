@@ -21,6 +21,7 @@ public class AcademyController {
     //학원 전체 리스트 가져오기
     @GetMapping("/api/academies")
     public ResponseEntity<?> getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
+        System.out.println(searchAcademysReqDto);
         return ResponseEntity.ok(academyService.getAcademies(searchAcademysReqDto));
     }
 
@@ -62,7 +63,6 @@ public class AcademyController {
     //상세페이지 - 후기 쓰기
     @PostMapping("/api/review")
     public ResponseEntity<?> writeReview(@RequestBody ReviewReqDto reviewReqDto) {
-        System.out.println("들어옴???");
         return ResponseEntity.ok(academyService.writeReview(reviewReqDto));
     }
 }
