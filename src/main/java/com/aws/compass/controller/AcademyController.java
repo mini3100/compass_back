@@ -64,7 +64,8 @@ public class AcademyController {
     @PutMapping("/api/academy")
     public ResponseEntity<?> editAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
         return ResponseEntity.ok(academyService.editAcademyInfo(editAcademyInfoReqDto));
-  
+    }
+
     //상세페이지 - 후기 쓰기
     @PostMapping("/api/review")
     public ResponseEntity<?> writeReview(@RequestBody ReviewReqDto reviewReqDto) {
