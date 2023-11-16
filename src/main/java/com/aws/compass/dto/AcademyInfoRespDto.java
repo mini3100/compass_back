@@ -13,7 +13,10 @@ import java.util.List;
 public class AcademyInfoRespDto {
     private Academy academy;
     private AcademyInfo academyInfo;
+
     private List<String> convenienceInfo;
     private List<String> ageRange;
     private List<ClassInfo> classInfo;
+
+
 }

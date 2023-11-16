@@ -3,6 +3,7 @@ package com.aws.compass.service;
 import com.aws.compass.dto.*;
 import com.aws.compass.entity.*;
 import com.aws.compass.exception.AcademyException;
+import com.aws.compass.exception.ReviewException;
 import com.aws.compass.repository.AcademyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,7 @@ public class AcademyService {
     }
 
     public ReviewRespDto getAcademyReviews(int academyId) {
-        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId));
+        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
     }
 
     public boolean editAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
@@ -80,6 +81,16 @@ public class AcademyService {
         List<ClassInfo> classInfo = editAcademyInfoReqDto.getClassInfo();
         return academyMapper.updateAcademyInfo(academyInfo) > 0;
     }
+  
+    public boolean writeReview(ReviewReqDto reviewReqDto) {
+        Review review = reviewReqDto.toReview();
+        int errorCode = academyMapper.reviewDuplicate(review);
+        if(errorCode > 0) {
+            throw new ReviewException( "후기작성은 한 번만 가능합니다.\n작성한 후기의 수정, 삭제만 가능합니다.");
+        }
+        return academyMapper.writeReview(review) > 0;
+    }
+
 }
 
 
