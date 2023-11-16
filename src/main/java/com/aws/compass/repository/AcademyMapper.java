@@ -1,5 +1,6 @@
 package com.aws.compass.repository;
 
+import com.aws.compass.dto.ReviewReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.entity.*;
 import com.aws.compass.vo.AcademySearchVo;
@@ -24,4 +25,7 @@ public interface AcademyMapper {
     public List<AcademyRegistration> getMyAcademyRegistrations(int userId, int index);
     public int getMyAcademyCount(int userId);
     public List<Review> getAcademyReviews(int academyId);
+    public ReviewCount getAcademyReviewCount(int academyId);
+    public int writeReview(Review review);
+    public int reviewDuplicate(Review review);
 }

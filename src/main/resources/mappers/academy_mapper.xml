@@ -252,6 +252,12 @@
             null
         )
     </insert>
+
+    <insert id="writeReview">
+        insert into review_tb
+        values(0, #{ACADEMY_ID}, #{user_id}, #{score}, #{review_content});
+    </insert>
+
     <select id="academyDuplicate" resultType="java.lang.Integer">
         select
         	if(count(*) > 0, 1, 0) as result
@@ -267,7 +273,8 @@
         	at.FA_RDNMA,
         	at.FA_RDNDA,
             at.REALM_SC_NM,
-            at.LE_CRSE_LIST_NM
+            at.LE_CRSE_LIST_NM,
+            at.FA_TELNO
         from
         	academy_tb at
         where
@@ -403,6 +410,26 @@
         	review_tb rt
             left outer join user_tb ut on(ut.user_id = rt.user_id)
         where
-        	rt.ACADEMY_ID = #{academyId};
+            rt.ACADEMY_ID = #{academyId};
+    </select>
+
+    <select id="getAcademyReviewCount" resultType="com.aws.compass.entity.ReviewCount">
+        select
+            count(rt.review_id) as review_count,
+            Round(avg(score), 1) as score_avg
+        from
+        	review_tb rt
+        	left outer join user_tb ut on(ut.user_id = rt.user_id)
+        where
+        	rt.ACADEMY_ID = #{id};
+    </select>
+
+    <select id="reviewDuplicate" resultType="java.lang.Integer">
+        select
+        	if(count(*) > 0, 1, 0) as result
+        from
+        	review_tb
+        where
+        	ACADEMY_ID = 1;
     </select>
 </mapper>
