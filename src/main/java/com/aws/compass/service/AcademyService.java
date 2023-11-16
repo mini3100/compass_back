@@ -73,6 +73,15 @@ public class AcademyService {
         return new ReviewRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
     }
 
+    public boolean editAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        Academy academy = editAcademyInfoReqDto.getAcademy();
+        AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
+        List<String> convenienceInfo = editAcademyInfoReqDto.getConvenienceInfo();
+        List<String> ageRange = editAcademyInfoReqDto.getAgeRange();
+        List<ClassInfo> classInfo = editAcademyInfoReqDto.getClassInfo();
+        return academyMapper.updateAcademyInfo(academyInfo) > 0;
+    }
+  
     public boolean writeReview(ReviewReqDto reviewReqDto) {
         Review review = reviewReqDto.toReview();
         int errorCode = academyMapper.reviewDuplicate(review);
@@ -81,7 +90,6 @@ public class AcademyService {
         }
         return academyMapper.writeReview(review) > 0;
     }
-
 
 }
 

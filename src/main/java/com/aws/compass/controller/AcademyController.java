@@ -4,6 +4,7 @@ import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
 import com.aws.compass.dto.ReviewReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
+import com.aws.compass.dto.EditAcademyInfoReqDto;
 import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,10 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
     }
 
+    @PutMapping("/api/academy")
+    public ResponseEntity<?> editAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        return ResponseEntity.ok(academyService.editAcademyInfo(editAcademyInfoReqDto));
+  
     //상세페이지 - 후기 쓰기
     @PostMapping("/api/review")
     public ResponseEntity<?> writeReview(@RequestBody ReviewReqDto reviewReqDto) {
