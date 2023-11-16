@@ -68,6 +68,19 @@
         where
             academy_registration_id = #{academyRegistrationId}
     </update>
+    <update id="updateAcademyInfo" parameterType="com.aws.compass.entity.AcademyInfo">
+        update
+            academy_info_tb
+        set
+            logo_img = #{logo_img},
+            class_size = #{class_size},
+            course_period = #{course_period},
+            purpose = #{purpose},
+            home_page = #{home_page},
+            phone = #{phone}
+        where
+            academy_info_id = #{academy_info_id}
+    </update>
 
     <select id="getListTotalCount" resultType="int" parameterType="com.aws.compass.vo.AcademySearchVo">
         select
@@ -276,6 +289,8 @@
 
     <select id="getAcademyInfo" resultType="com.aws.compass.entity.AcademyInfo">
         select
+            ait.ACADEMY_ID,
+            ait.academy_info_id,
         	ait.logo_img,
         	ait.class_size,
         	ait.course_period,

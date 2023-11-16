@@ -3,6 +3,7 @@ package com.aws.compass.controller;
 import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
+import com.aws.compass.dto.EditAcademyInfoReqDto;
 import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -56,5 +57,10 @@ public class AcademyController {
     @GetMapping("/api/academy/{academyId}/reviews")
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
+    }
+
+    @PutMapping("/api/academy")
+    public ResponseEntity<?> editAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        return ResponseEntity.ok(academyService.editAcademyInfo(editAcademyInfoReqDto));
     }
 }

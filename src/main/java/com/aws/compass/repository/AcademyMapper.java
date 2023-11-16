@@ -24,4 +24,5 @@ public interface AcademyMapper {
     public List<AcademyRegistration> getMyAcademyRegistrations(int userId, int index);
     public int getMyAcademyCount(int userId);
     public List<Review> getAcademyReviews(int academyId);
+    public int updateAcademyInfo(AcademyInfo academyInfo);
 }
