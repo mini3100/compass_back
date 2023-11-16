@@ -137,7 +137,7 @@
             </if>
     </select>
 
-    <select id="getAcademies" parameterType="com.aws.compass.vo.AcademySearchVo" resultType="com.aws.compass.entity.Academy">
+    <select id="getAcademies" parameterType="com.aws.compass.vo.AcademySearchVo" resultMap="academyMap">
         SELECT
             ACADEMY_ID,
             ATPT_OFCDC_SC_CODE,
@@ -204,9 +204,9 @@
                     #{ageId}
                 </foreach>
                 GROUP BY
-                ait.ACADEMY_ID
+                    ait.ACADEMY_ID
                 HAVING
-                COUNT(DISTINCT aat.age_id) = #{countAgeId}
+                    COUNT(DISTINCT aat.age_id) = #{countAgeId}
                 )
             </if>
             <if test="convenienceIds != null and !convenienceIds.isEmpty()">

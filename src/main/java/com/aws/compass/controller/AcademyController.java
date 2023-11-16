@@ -20,6 +20,7 @@ public class AcademyController {
     //학원 전체 리스트 가져오기
     @GetMapping("/api/academies")
     public ResponseEntity<?> getAcademies(SearchAcademysReqDto searchAcademysReqDto) {
+        System.out.println(searchAcademysReqDto);
         return ResponseEntity.ok(academyService.getAcademies(searchAcademysReqDto));
     }
 
