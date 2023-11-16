@@ -2,6 +2,7 @@ package com.aws.compass.controller;
 
 import com.aws.compass.aop.annotation.ValidAop;
 import com.aws.compass.dto.AcademyRegistrationReqDto;
+import com.aws.compass.dto.ReviewReqDto;
 import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
@@ -56,5 +57,12 @@ public class AcademyController {
     @GetMapping("/api/academy/{academyId}/reviews")
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
+    }
+
+    //상세페이지 - 후기 쓰기
+    @PostMapping("/api/review")
+    public ResponseEntity<?> writeReview(@RequestBody ReviewReqDto reviewReqDto) {
+        System.out.println("들어옴???");
+        return ResponseEntity.ok(academyService.writeReview(reviewReqDto));
     }
 }

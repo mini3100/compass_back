@@ -25,7 +25,6 @@ public class SearchAcademysReqDto {
     private int countConvenienceId;
 
     public AcademySearchVo toVo() {
-
         return AcademySearchVo.builder()
                 .index((pIndex - 1) * pSize)
                 .pSize(pSize)
