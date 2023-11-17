@@ -9,9 +9,8 @@ import java.util.List;
 
 @Data
 public class EditAcademyInfoReqDto {
-    private Academy academy;
-        private AcademyInfo academyInfo;
-        private List<String> convenienceInfo;
-        private List<String> ageRange;
-        private List<ClassInfo> classInfo;
+    private AcademyInfo academyInfo;
+    private List<String> convenienceInfo;
+    private List<String> ageRange;
+    private List<ClassInfo> classInfo;
 }

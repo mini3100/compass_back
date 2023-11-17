@@ -74,12 +74,16 @@ public class AcademyService {
     }
 
     public boolean editAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
-        Academy academy = editAcademyInfoReqDto.getAcademy();
         AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
         List<String> convenienceInfo = editAcademyInfoReqDto.getConvenienceInfo();
         List<String> ageRange = editAcademyInfoReqDto.getAgeRange();
         List<ClassInfo> classInfo = editAcademyInfoReqDto.getClassInfo();
         return academyMapper.updateAcademyInfo(academyInfo) > 0;
+    }
+
+    public boolean addAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
+        return academyMapper.insertAcademyInfo(academyInfo) > 0;
     }
   
     public boolean writeReview(ReviewReqDto reviewReqDto) {
@@ -90,7 +94,6 @@ public class AcademyService {
         }
         return academyMapper.writeReview(review) > 0;
     }
-
 }
 
 

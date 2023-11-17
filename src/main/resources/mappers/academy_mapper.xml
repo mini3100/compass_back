@@ -270,6 +270,10 @@
         insert into review_tb
         values(0, #{ACADEMY_ID}, #{user_id}, #{score}, #{review_content});
     </insert>
+    <insert id="insertAcademyInfo">
+        insert into academy_info_tb
+        values(0, #{ACADEMY_ID}, #{userId}, #{logoImg}, #{classSize}, #{coursePeriod}, #{purpose}, #{homePage}, #{phone})
+    </insert>
 
     <select id="academyDuplicate" resultType="java.lang.Integer">
         select
@@ -298,6 +302,7 @@
         select
             ait.ACADEMY_ID,
             ait.academy_info_id,
+            ait.user_id,
         	ait.logo_img,
         	ait.class_size,
         	ait.course_period,
