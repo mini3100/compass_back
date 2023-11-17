@@ -445,6 +445,6 @@
         from
         	review_tb
         where
-        	ACADEMY_ID = 1;
+        	ACADEMY_ID = #{ACADEMY_ID} and user_id = #{user_id};
     </select>
 </mapper>
