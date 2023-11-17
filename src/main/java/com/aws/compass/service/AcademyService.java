@@ -45,8 +45,8 @@ public class AcademyService {
     public AcademyInfoRespDto getAcademy(int ACADEMY_ID) {
         Academy academy = academyMapper.getAcademy(ACADEMY_ID);
         AcademyInfo academyInfo  = academyMapper.getAcademyInfo(ACADEMY_ID);
-        List<String> convenienceInfo = academyMapper.getConvenienceInfo(ACADEMY_ID);
-        List<String> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
+        List<Convenience> convenienceInfo = academyMapper.getConvenience(ACADEMY_ID);
+        List<Age> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
         List<ClassInfo> classInfo = academyMapper.getClassInfo(ACADEMY_ID);
         return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
     }

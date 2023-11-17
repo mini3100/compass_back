@@ -16,8 +16,8 @@ public interface AcademyMapper {
     public List<Academy> getAcademies(AcademySearchVo academySearchVo);
     public Academy getAcademy(int ACADEMY_ID);
     public AcademyInfo getAcademyInfo(int ACADEMY_ID);
-    public List<String> getConvenienceInfo(int ACADEMY_ID);
-    public List<String> getAgeRange(int ACADEMY_ID);
+    public List<Convenience> getConvenience(int ACADEMY_ID);
+    public List<Age> getAgeRange(int ACADEMY_ID);
     public List<ClassInfo> getClassInfo(int ACADEMY_ID);
     public int getListTotalCount(AcademySearchVo academySearchVo);
     public List<AcademyRegistration> getAppliedAcademyRegistrations(int userId, int index);
