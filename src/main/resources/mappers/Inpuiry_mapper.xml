@@ -6,6 +6,6 @@
 
     <insert id="saveInpuiry" parameterType="com.aws.compass.entity.Inquiry">
         insert into inquiry_tb
-        value(0, #{userId}, #{academyId}, #{inquiryTitle}, #{inquiryContent}, null)
+        value(0, #{userId}, #{academyId}, #{inquiryTitle}, #{inquiryContent}, null, #{answerChecked})
     </insert>
 </mapper>

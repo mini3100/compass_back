@@ -16,6 +16,7 @@ public class WriteInquiryReqDto {
     private String inquiryTitle;
     @NotBlank
     private String inquiryContent;
+    private int answerChecked;
 
     public Inquiry toInquiry() {
         return Inquiry.builder()
@@ -23,6 +24,7 @@ public class WriteInquiryReqDto {
                 .academyId(academyId)
                 .inquiryTitle(inquiryTitle)
                 .inquiryContent(inquiryContent)
+                .answerChecked(answerChecked)
                 .build();
     }
 }

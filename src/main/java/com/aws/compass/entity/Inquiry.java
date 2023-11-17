@@ -15,5 +15,6 @@ public class Inquiry {
     private  String inquiryTitle;
     private String inquiryContent;
     private String answer;
+    private int answerChecked;
 
 }
