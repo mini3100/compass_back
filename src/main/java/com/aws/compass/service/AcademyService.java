@@ -74,6 +74,10 @@ public class AcademyService {
     public ReviewRespDto getAcademyReviews(int academyId) {
         return new ReviewRespDto(academyMapper.getAcademyReviews(academyId));
     }
+
+    public boolean isAcademyRegistered(int academyId) {
+        return academyMapper.getRegisteredAcademy(academyId) > 0;
+    }
 }
 
 

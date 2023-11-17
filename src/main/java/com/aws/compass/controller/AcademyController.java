@@ -58,4 +58,9 @@ public class AcademyController {
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
     }
+
+    @GetMapping("/api/academy/check/{academyId}")
+    public ResponseEntity<?> isAcademyAdminRegistered(@PathVariable int academyId) {
+        return ResponseEntity.ok(academyService.isAcademyRegistered(academyId));
+    }
 }

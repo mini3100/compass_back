@@ -405,4 +405,12 @@
         where
         	rt.ACADEMY_ID = #{academyId};
     </select>
+    <select id="getRegisteredAcademy" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            academy_info_tb
+        where
+            ACADEMY_ID = #{academyId}
+    </select>
 </mapper>
