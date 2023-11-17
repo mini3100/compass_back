@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ClassInfo {
-    private String class_name;
-    private int class_price;
+    private int classInfoId;
+    private String className;
+    private int classPrice;
 }
