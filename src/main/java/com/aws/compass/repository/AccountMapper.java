@@ -1,12 +1,10 @@
 package com.aws.compass.repository;
 
 import com.aws.compass.entity.Academy;
-import com.aws.compass.entity.AcademyRegistration;
 import com.aws.compass.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface AccountMapper {
