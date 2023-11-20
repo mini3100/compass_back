@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface InpuiryMapper {
     public int saveInpuiry(Inquiry inquiry);
+    public int getUserInquiriesCount(int userId);
+    public List<Inquiry> getUserInquiries(int userId, int index);
 }

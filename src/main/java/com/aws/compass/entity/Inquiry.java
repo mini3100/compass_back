@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Inquiry {
+    private int inquiryId;
     private int userId;
     private int academyId;
-    private  String inquiryTitle;
+    private String acaNm;
+    private String inquiryTitle;
     private String inquiryContent;
     private String answer;
     private int answerChecked;

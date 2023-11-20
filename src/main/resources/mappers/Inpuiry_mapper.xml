@@ -3,9 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aws.compass.repository.InpuiryMapper">
+    <resultMap id="getUserInquiryMap" type="com.aws.compass.entity.Inquiry">
+        <id property="inquiryId" column="inquiry_id"></id>
+        <result property="acaNm" column="ACA_NM"></result>
+        <result property="inquiryTitle" column="inquiry_title"></result>
+        <result property="inquiryContent" column="inquiry_content"></result>
+        <result property="answer" column="answer"></result>
+        <result property="answerChecked" column="answer_checked"></result>
+    </resultMap>
 
     <insert id="saveInpuiry" parameterType="com.aws.compass.entity.Inquiry">
         insert into inquiry_tb
-        value(0, #{userId}, #{academyId}, #{inquiryTitle}, #{inquiryContent}, null, #{answerChecked})
+        value(0, #{userId}, #{academyId}, #{inquiryTitle}, #{inquiryContent}, #{answer}, #{answerChecked})
     </insert>
+
+    <select id="getUserInquiries" resultMap="getUserInquiryMap">
+        SELECT
+            it.inquiry_id,
+            at.ACA_NM,
+            it.inquiry_title,
+            it.inquiry_content,
+            it.answer,
+            it.answer_checked
+        FROM
+            inquiry_tb it
+            LEFT OUTER JOIN academy_tb at ON (at.ACADEMY_ID = it.ACADEMY_ID)
+        WHERE
+            user_id = #{userId}
+        ORDER BY
+            it.inquiry_id DESC
+        LIMIT #{index}, 5
+    </select>
+    <select id="getUserInquiriesCount" resultType="java.lang.Integer">
+        select
+            count(*)
+        FROM
+            inquiry_tb it
+            left outer join academy_tb at on(at.ACADEMY_ID = it.ACADEMY_ID)
+        WHERE
+            user_id = #{userId}
+    </select>
 </mapper>

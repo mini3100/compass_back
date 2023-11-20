@@ -5,9 +5,7 @@ import com.aws.compass.service.InquiryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,5 +19,12 @@ public class InquiryController {
     public ResponseEntity<?> writeInquiry(@Valid @RequestBody WriteInquiryReqDto inquiryReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(inquiryService.writeInquiry(inquiryReqDto));
     }
+
+    @GetMapping("/api/{userId}/inquiries/{page}")
+    public ResponseEntity<?> getUserInquiryList(@PathVariable int userId,@PathVariable int page) {
+        return ResponseEntity.ok(inquiryService.getUserInquiries(userId, page));
+    }
+
+
 
 }
