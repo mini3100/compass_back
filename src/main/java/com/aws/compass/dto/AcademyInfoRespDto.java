@@ -1,8 +1,6 @@
 package com.aws.compass.dto;
 
-import com.aws.compass.entity.Academy;
-import com.aws.compass.entity.AcademyInfo;
-import com.aws.compass.entity.ClassInfo;
+import com.aws.compass.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,7 +11,7 @@ import java.util.List;
 public class AcademyInfoRespDto {
     private Academy academy;
     private AcademyInfo academyInfo;
-    private List<String> convenienceInfo;
-    private List<String> ageRange;
+    private List<Convenience> convenience;
+    private List<Age> age;
     private List<ClassInfo> classInfo;
 }

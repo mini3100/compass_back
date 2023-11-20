@@ -76,6 +76,8 @@
             convenience_name
         from
             convenience_tb
+        order by
+            convenience_id
     </select>
     <select id="getAgeList" resultMap="ageMap">
         select
@@ -83,6 +85,8 @@
             age_range
         from
             age_tb
+        order by
+            age_id
     </select>
 
 </mapper>

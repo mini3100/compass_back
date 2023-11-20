@@ -13,14 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class AcademyInfo {
-    private int academy_info_id;
+    private int academyInfoId;
     @JsonProperty("ACADEMY_ID")
     private int ACADEMY_ID;
-    private int user_id;
-    private String logo_img;
-    private String class_size;
-    private String course_period;
+    private int userId;
+    private String logoImg;
+    private String classSize;
+    private String coursePeriod;
     private String purpose;
-    private String home_page;
+    private String homePage;
     private String phone;
 }

@@ -6,9 +6,7 @@ import lombok.Data;
 @Builder
 @Data
 public class AcademyLikeRespDto {
-
     private int likeId;
     private int userId;
     private int ACADEMYID;
-
 }

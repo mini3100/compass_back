@@ -1,11 +1,9 @@
 package com.aws.compass.service;
 
 import com.aws.compass.dto.*;
-import com.aws.compass.entity.Academy;
-import com.aws.compass.entity.AcademyInfo;
-import com.aws.compass.entity.AcademyRegistration;
-import com.aws.compass.entity.ClassInfo;
+import com.aws.compass.entity.*;
 import com.aws.compass.exception.AcademyException;
+import com.aws.compass.exception.ReviewException;
 import com.aws.compass.repository.AcademyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,8 +45,8 @@ public class AcademyService {
     public AcademyInfoRespDto getAcademy(int ACADEMY_ID) {
         Academy academy = academyMapper.getAcademy(ACADEMY_ID);
         AcademyInfo academyInfo  = academyMapper.getAcademyInfo(ACADEMY_ID);
-        List<String> convenienceInfo = academyMapper.getConvenienceInfo(ACADEMY_ID);
-        List<String> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
+        List<Convenience> convenienceInfo = academyMapper.getConvenience(ACADEMY_ID);
+        List<Age> ageRange = academyMapper.getAgeRange(ACADEMY_ID);
         List<ClassInfo> classInfo = academyMapper.getClassInfo(ACADEMY_ID);
         return new AcademyInfoRespDto(academy, academyInfo, convenienceInfo, ageRange, classInfo);
     }
@@ -72,7 +70,29 @@ public class AcademyService {
     }
 
     public ReviewRespDto getAcademyReviews(int academyId) {
-        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId));
+        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
+    }
+
+    public boolean editAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
+        List<String> convenienceInfo = editAcademyInfoReqDto.getConvenienceInfo();
+        List<String> ageRange = editAcademyInfoReqDto.getAgeRange();
+        List<ClassInfo> classInfo = editAcademyInfoReqDto.getClassInfo();
+        return academyMapper.updateAcademyInfo(academyInfo) > 0;
+    }
+
+    public boolean addAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
+        AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
+        return academyMapper.insertAcademyInfo(academyInfo) > 0;
+    }
+  
+    public boolean writeReview(ReviewReqDto reviewReqDto) {
+        Review review = reviewReqDto.toReview();
+        int errorCode = academyMapper.reviewDuplicate(review);
+        if(errorCode > 0) {
+            throw new ReviewException( "후기작성은 한 번만 가능합니다.\n작성한 후기의 수정, 삭제만 가능합니다.");
+        }
+        return academyMapper.writeReview(review) > 0;
     }
 
     public boolean isAcademyRegistered(int academyId) {

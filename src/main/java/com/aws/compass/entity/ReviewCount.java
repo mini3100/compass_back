@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ClassInfo {
-    private int classInfoId;
-    private String className;
-    private int classPrice;
+public class ReviewCount {
+    private int review_count;
+    private int score_avg;
 }
