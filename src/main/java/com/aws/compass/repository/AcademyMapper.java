@@ -1,7 +1,5 @@
 package com.aws.compass.repository;
 
-import com.aws.compass.dto.ReviewReqDto;
-import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.entity.*;
 import com.aws.compass.vo.AcademySearchVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,6 +26,12 @@ public interface AcademyMapper {
     public int getRegisteredAcademy(int academyId);
     public int updateAcademyInfo(AcademyInfo academyInfo);
     public int insertAcademyInfo(AcademyInfo academyInfo);
+    public int deleteAge(int academyInfoId);
+    public int insertAge(int academyInfoId, int ageId);
+    public int deleteConvenience(int academyInfoId);
+    public int insertConvenience(int academyInfoId, int convenienceId);
+    public int deleteClassInfo(int academyInfoId);
+    public int insertClassInfo(int academyInfoId, ClassInfo classInfo);
     public ReviewCount getAcademyReviewCount(int academyId);
     public int writeReview(Review review);
     public int reviewDuplicate(Review review);

@@ -100,15 +100,33 @@
         update
             academy_info_tb
         set
-            logo_img = #{logo_img},
-            class_size = #{class_size},
-            course_period = #{course_period},
+            logo_img = #{logoImg},
+            class_size = #{classSize},
+            course_period = #{coursePeriod},
             purpose = #{purpose},
-            home_page = #{home_page},
+            home_page = #{homePage},
             phone = #{phone}
         where
-            academy_info_id = #{academy_info_id}
+            academy_info_id = #{academyInfoId}
     </update>
+    <delete id="deleteConvenience">
+        delete from
+            academy_convenience_tb
+        where
+            academy_info_id = #{academy_info_id}
+    </delete>
+    <delete id="deleteAge">
+        delete from
+            attendance_age_tb
+        where
+            academy_info_id = #{academy_info_id}
+    </delete>
+    <delete id="deleteClassInfo">
+        delete from
+            class_info_tb
+        where
+            academy_info_id = #{academy_info_id}
+    </delete>
 
     <select id="getListTotalCount" resultType="int" parameterType="com.aws.compass.vo.AcademySearchVo">
         select
@@ -301,6 +319,18 @@
     <insert id="insertAcademyInfo">
         insert into academy_info_tb
         values(0, #{ACADEMY_ID}, #{userId}, #{logoImg}, #{classSize}, #{coursePeriod}, #{purpose}, #{homePage}, #{phone})
+    </insert>
+    <insert id="insertConvenience">
+        insert into academy_convenience_tb
+        values(0, #{academyInfoId}, #{convenienceId})
+    </insert>
+    <insert id="insertAge">
+        insert into attendance_age_tb
+        values(0, #{academyInfoId}, #{ageId})
+    </insert>
+    <insert id="insertClassInfo">
+        insert into class_info_tb
+        values(0, #{academyInfoId}, #{classInfo.className}, #{classInfo.classPrice})
     </insert>
 
     <select id="academyDuplicate" resultType="java.lang.Integer">
