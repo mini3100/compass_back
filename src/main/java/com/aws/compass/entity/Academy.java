@@ -63,4 +63,5 @@ public class Academy {
     private String FA_TELNO;
     @JsonProperty("LOAD_DTM")
     private String LOAD_DTM;
+    private String logoImg;
 }
