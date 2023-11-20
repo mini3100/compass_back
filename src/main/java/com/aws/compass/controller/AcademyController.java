@@ -7,6 +7,7 @@ import com.aws.compass.dto.SearchAcademysReqDto;
 import com.aws.compass.dto.EditAcademyInfoReqDto;
 import com.aws.compass.service.AcademyService;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.apache.bcel.generic.ClassGen;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +67,7 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.editAcademyInfo(editAcademyInfoReqDto));
     }
 
-    @PostMapping("/api/academyInfo")
+    @PostMapping("/api/academyInfo/{ACADEMY_ID}")
     public ResponseEntity<?> addAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
         return ResponseEntity.ok(academyService.addAcademyInfo(editAcademyInfoReqDto));
     }

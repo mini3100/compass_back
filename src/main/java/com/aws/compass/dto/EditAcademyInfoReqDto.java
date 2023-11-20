@@ -1,8 +1,6 @@
 package com.aws.compass.dto;
 
-import com.aws.compass.entity.Academy;
-import com.aws.compass.entity.AcademyInfo;
-import com.aws.compass.entity.ClassInfo;
+import com.aws.compass.entity.*;
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.List;
 @Data
 public class EditAcademyInfoReqDto {
     private AcademyInfo academyInfo;
-    private List<String> convenienceInfo;
-    private List<String> ageRange;
+    private List<Convenience> convenience;
+    private List<Age> age;
     private List<ClassInfo> classInfo;
 }
