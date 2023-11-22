@@ -517,6 +517,24 @@
         where
         	ACADEMY_ID = #{ACADEMY_ID} and user_id = #{user_id};
     </select>
+    <select id="getRegisteredAcademy" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            academy_info_tb
+        where
+            ACADEMY_ID = #{academyId}
+    </select>
+    <select id="getAcademyByuserId" resultType="com.aws.compass.entity.Academy">
+        select
+            ait.ACADEMY_ID,
+            at.ACA_NM
+        from
+            academy_info_tb ait
+            left outer join academy_tb at on(at.ACADEMY_ID = ait.ACADEMY_ID)
+        where
+            ait.user_id = #{userId}
+
     <select id="getAcademyLogoImg" resultType="java.lang.String">
         select
             logo_img

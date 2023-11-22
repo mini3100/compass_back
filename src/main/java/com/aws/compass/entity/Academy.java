@@ -1,5 +1,6 @@
 package com.aws.compass.entity;
 
+import com.aws.compass.dto.MyAcademyNamesRespDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -64,4 +65,11 @@ public class Academy {
     @JsonProperty("LOAD_DTM")
     private String LOAD_DTM;
     private String logoImg;
+
+    public MyAcademyNamesRespDto toMyAcademyNamesRespDto() {
+        return MyAcademyNamesRespDto.builder()
+                .academyId(ACADEMY_ID)
+                .acaNm(ACA_NM)
+                .build();
+    }
 }

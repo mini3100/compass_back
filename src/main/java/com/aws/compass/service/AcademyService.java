@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,6 +70,12 @@ public class AcademyService {
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }
 
+    public List<MyAcademyNamesRespDto> getMyAcademyNames(int userId) {
+        List<MyAcademyNamesRespDto> myAcademyNamesRespDtos = new ArrayList<>();
+        academyMapper.getAcademyByuserId(userId).forEach(academy -> myAcademyNamesRespDtos.add(academy.toMyAcademyNamesRespDto()));
+        return myAcademyNamesRespDtos;
+    }
+
     public ReviewRespDto getAcademyReviews(int academyId) {
         return new ReviewRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
     }
@@ -111,6 +118,10 @@ public class AcademyService {
             throw new ReviewException( "후기작성은 한 번만 가능합니다.\n작성한 후기의 수정, 삭제만 가능합니다.");
         }
         return academyMapper.writeReview(review) > 0;
+    }
+
+    public boolean isAcademyRegistered(int academyId) {
+        return academyMapper.getRegisteredAcademy(academyId) > 0;
     }
 }
 
