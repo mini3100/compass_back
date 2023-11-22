@@ -56,6 +56,11 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.getMyAcademies(userId, page));
     }
 
+    @GetMapping("/api/academies/{userId}")
+    public ResponseEntity<?> getMyAcademyNames(@PathVariable int userId) {
+        return ResponseEntity.ok(academyService.getMyAcademyNames(userId));
+    }
+
     //상세페이지 - 후기 가져오기
     @GetMapping("/api/academy/{academyId}/reviews")
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {

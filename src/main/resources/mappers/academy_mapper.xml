@@ -522,4 +522,14 @@
         where
             ACADEMY_ID = #{academyId}
     </select>
+    <select id="getAcademyByuserId" resultType="com.aws.compass.entity.Academy">
+        select
+            ait.ACADEMY_ID,
+            at.ACA_NM
+        from
+            academy_info_tb ait
+            left outer join academy_tb at on(at.ACADEMY_ID = ait.ACADEMY_ID)
+        where
+            ait.user_id = #{userId}
+    </select>
 </mapper>

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,6 +68,12 @@ public class AcademyService {
         int listTotalCount = academyMapper.getMyAcademyCount(userId);
 
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
+    }
+
+    public List<MyAcademyNamesRespDto> getMyAcademyNames(int userId) {
+        List<MyAcademyNamesRespDto> myAcademyNamesRespDtos = new ArrayList<>();
+        academyMapper.getAcademyByuserId(userId).forEach(academy -> myAcademyNamesRespDtos.add(academy.toMyAcademyNamesRespDto()));
+        return myAcademyNamesRespDtos;
     }
 
     public ReviewRespDto getAcademyReviews(int academyId) {
