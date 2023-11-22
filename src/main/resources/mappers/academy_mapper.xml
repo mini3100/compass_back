@@ -534,7 +534,7 @@
             left outer join academy_tb at on(at.ACADEMY_ID = ait.ACADEMY_ID)
         where
             ait.user_id = #{userId}
-
+    </select>
     <select id="getAcademyLogoImg" resultType="java.lang.String">
         select
             logo_img
