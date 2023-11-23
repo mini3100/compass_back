@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface AcademyMapper {
-    public int academyDuplicate(AcademyRegistration academyRegistration);
+    public int academyDuplicate(int academyId);
     public int academyRegist(AcademyRegistration academyRegistration);
     public int updateAcademyRegist(AcademyRegistration academyRegistration);
     public List<Academy> getAcademies(AcademySearchVo academySearchVo);
@@ -35,5 +35,8 @@ public interface AcademyMapper {
     public ReviewCount getAcademyReviewCount(int academyId);
     public int writeReview(Review review);
     public int reviewDuplicate(Review review);
+    public Review getMyReview(int academyId, int userId);
+    public int updateReview(Review review);
+    public int deleteReview(int academyId, int userId);
     public List<Academy> getAcademyByuserId(int userId);
 }

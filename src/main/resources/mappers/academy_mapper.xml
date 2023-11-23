@@ -77,6 +77,14 @@
         <result property="classPrice" column="class_price" />
     </resultMap>
 
+    <resultMap id="reviewMap" type="com.aws.compass.entity.Review">
+        <id property="reviewId" column="review_id" />
+        <result property="ACADEMY_ID" column="ACADEMY_ID" />
+        <result property="userId" column="user_id" />
+        <result property="score" column="score" />
+        <result property="reviewContent" column="review_content" />
+    </resultMap>
+
     <update id="updateAcademyRegist">
         update
             academy_registration_tb
@@ -127,6 +135,23 @@
             class_info_tb
         where
             academy_info_id = #{academy_info_id}
+    </delete>
+
+    <update id="updateReview">
+        update
+        	review_tb
+        set
+        	score = #{score},
+            review_content = #{reviewContent}
+        where
+            ACADEMY_ID = #{ACADEMY_ID} and user_id = #{userId};
+    </update>
+
+    <delete id="deleteReview">
+        delete from review_tb
+        where
+            ACADEMY_ID = #{academyId}
+            and user_id = #{userId};
     </delete>
 
     <select id="getListTotalCount" resultType="int" parameterType="com.aws.compass.vo.AcademySearchVo">
@@ -317,7 +342,7 @@
 
     <insert id="writeReview">
         insert into review_tb
-        values(0, #{ACADEMY_ID}, #{user_id}, #{score}, #{review_content});
+        values(0, #{ACADEMY_ID}, #{userId}, #{score}, #{reviewContent});
     </insert>
     <insert id="insertAcademyInfo">
         insert into academy_info_tb
@@ -483,7 +508,7 @@
             and art.approval_status = 1
     </select>
 
-    <select id="getAcademyReviews" resultType="com.aws.compass.entity.Review">
+    <select id="getAcademyReviews" resultMap="reviewMap">
         select
         	rt.review_id,
             rt.ACADEMY_ID,
@@ -500,8 +525,8 @@
 
     <select id="getAcademyReviewCount" resultType="com.aws.compass.entity.ReviewCount">
         select
-            count(rt.review_id) as review_count,
-            Round(avg(score), 1) as score_avg
+            count(rt.review_id) as reviewCount,
+            Round(avg(score), 1) as scoreAvg
         from
         	review_tb rt
         	left outer join user_tb ut on(ut.user_id = rt.user_id)
@@ -515,7 +540,22 @@
         from
         	review_tb
         where
-        	ACADEMY_ID = #{ACADEMY_ID} and user_id = #{user_id};
+        	ACADEMY_ID = #{ACADEMY_ID} and user_id = #{userId};
+    </select>
+
+    <select id="getMyReview" resultMap="reviewMap">
+        select
+            rt.review_id,
+            rt.ACADEMY_ID,
+            rt.user_id,
+            rt.score,
+            rt.review_content,
+            ut.nickname
+        from
+            review_tb rt
+            left outer join user_tb ut on(ut.user_id = rt.user_id)
+        where
+            rt.ACADEMY_ID = #{academyId} and rt.user_id = #{userId};
     </select>
     <select id="getRegisteredAcademy" resultType="java.lang.Integer">
         select

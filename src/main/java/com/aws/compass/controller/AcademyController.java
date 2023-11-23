@@ -88,6 +88,23 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.writeReview(reviewReqDto));
 
     }
+  
+    //상세페이지 - 내 후기 수정버튼 클릭 시 가져오기
+    @GetMapping("/api/review/{academyId}/{userId}")
+    public ResponseEntity<?> getMyReview(@PathVariable int academyId, @PathVariable int userId) {
+        System.out.println(academyId + userId);
+        return ResponseEntity.ok(academyService.getMyReview(academyId, userId));
+    }
 
+    //상세페이지 - 후기 수정
+    @PutMapping("/api/review")
+    public ResponseEntity<?> modifyReview(@RequestBody ReviewReqDto reviewReqDto) {
+        return ResponseEntity.ok(academyService.modifyReview(reviewReqDto));
+    }
 
+    //상세페이지 - 후기 삭제
+    @DeleteMapping("/api/review/{academyId}/{userId}")
+    public ResponseEntity<?> deleteReview(@PathVariable int academyId, @PathVariable int userId) {
+        return ResponseEntity.ok(academyService.deleteReview(academyId, userId));
+    }
 }

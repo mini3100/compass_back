@@ -1,16 +1,17 @@
 package com.aws.compass.dto;
 
 import com.aws.compass.entity.Review;
-import com.aws.compass.entity.ReviewCount;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class ReviewRespDto {
-    List<Review> reviewList;
-    ReviewCount reviewCount;
+    Review review;
 }
+

@@ -14,6 +14,16 @@
         <result property="enabled" column="enabled"/>
         <result property="roleId" column="role_id"/>
     </resultMap>
+
+    <resultMap id="reviewMap" type="com.aws.compass.entity.Review">
+        <id property="reviewId" column="review_id" />
+        <result property="ACADEMY_ID" column="ACADEMY_ID" />
+        <result property="userId" column="user_id" />
+        <result property="score" column="score" />
+        <result property="reviewContent" column="review_content" />
+        <result property="academyName" column="ACA_NM" />
+    </resultMap>
+  
     <resultMap id="academyMap" type="com.aws.compass.entity.Academy">
         <id property="ACADEMY_ID" column="ACADEMY_ID" />
         <result property="ATPT_OFCDC_SC_CODE" column="ATPT_OFCDC_SC_CODE" />
@@ -44,10 +54,12 @@
         <result property="logoImg" column="logo_img" />
     </resultMap>
 
+
     <insert id="insertLike">
         insert into like_tb
         values(0, #{userId}, #{academyId})
     </insert>
+
     <update id="updateUser">
         update
             user_tb
@@ -59,6 +71,7 @@
         where
             user_id = #{userId}
     </update>
+
     <update id="updateEnabledToEmail">
         update
             user_tb
@@ -67,6 +80,7 @@
         where
             email = #{email}
     </update>
+
     <delete id="deleteLike">
         delete
         from
@@ -74,8 +88,8 @@
         where
             user_id = #{userId}
             and ACADEMY_ID = #{academyId}
-
     </delete>
+
     <select id="findUserByEmail" resultMap="userMap">
         select
             user_id,
@@ -92,6 +106,7 @@
         where
             email = #{email}
     </select>
+
     <select id="checkDuplicateAndIdNot"
             parameterType="com.aws.compass.entity.User"
             resultType="java.lang.Integer">
@@ -135,6 +150,7 @@
         where
             user_id = #{userId}
     </select>
+
     <select id="getLikeAcademies"
             resultMap="academyMap">
         select
@@ -151,6 +167,7 @@
             lt.user_id = #{userId}
 
     </select>
+
     <select id="getLikeCountByAcademyId"
             resultType="java.lang.Integer">
         select
@@ -161,6 +178,20 @@
             academy_id = #{academyId}
     </select>
 
+    <select id="getUserReviews" resultMap="reviewMap">
+        select
+        	rt.review_id,
+        	rt.ACADEMY_ID,
+        	rt.user_id,
+        	rt.score,
+        	rt.review_content,
+        	at.ACA_NM
+        from
+        	review_tb rt
+        	left outer join academy_tb at on(at.ACADEMY_ID = rt.ACADEMY_ID)
+        where
+        	rt.user_id = #{userId};
+    </select>
 
     <!--    <select id="getLikeAcademiesByUserId"-->
 <!--            resultType="com.aws.compass.entity.AcademyRegistration">-->
