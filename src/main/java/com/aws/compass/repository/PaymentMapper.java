@@ -12,5 +12,5 @@ public interface PaymentMapper {
 
     public List<Product> getProducts();
     public int savePurchase(Purchase purchase);
-    public List<Academy> getPurchaseAcademy();
+    public Product checkPurchase(int userId, int academyId);
 }

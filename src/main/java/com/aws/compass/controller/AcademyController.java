@@ -77,4 +77,6 @@ public class AcademyController {
     public ResponseEntity<?> writeReview(@RequestBody ReviewReqDto reviewReqDto) {
         return ResponseEntity.ok(academyService.writeReview(reviewReqDto));
     }
+
+
 }

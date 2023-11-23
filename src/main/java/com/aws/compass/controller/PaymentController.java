@@ -22,8 +22,8 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.purchase(purchaseReqDto));
     }
 
-    @GetMapping("/api/purchase")
-    public ResponseEntity<?> getPurchaseAcademy() {
-        return ResponseEntity.ok(paymentService.getPurchaseAcademy());
+    @GetMapping("/api/purchase/check")
+    public ResponseEntity<?> getPurchaseInfo(@RequestParam int userId, @RequestParam int academyId) {
+        return ResponseEntity.ok(paymentService.isPurchase(userId, academyId));
     }
 }
