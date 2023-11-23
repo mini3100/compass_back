@@ -290,6 +290,17 @@
                         COUNT(DISTINCT act.convenience_id) = #{countConvenienceId}
                 )
             </if>
+        ORDER BY
+            CASE
+                WHEN #{classify} = '등록순' THEN ait.ACADEMY_ID
+                WHEN #{classify} = '좋아요순' THEN (
+                    SELECT COUNT(*) FROM like_tb WHERE like_tb.ACADEMY_ID = at.ACADEMY_ID
+                )
+                WHEN #{classify} = '별점순' THEN (
+                    SELECT avg(score) FROM review_tb WHERE review_tb.ACADEMY_ID = at.ACADEMY_ID
+                )
+                ELSE ait.ACADEMY_ID
+            END DESC
         LIMIT #{index}, #{pSize}
     </select>
 
