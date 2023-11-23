@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ReviewCount {
-    private int review_count;
-    private int score_avg;
+    private int reviewCount;
+    private int scoreAvg;
 }

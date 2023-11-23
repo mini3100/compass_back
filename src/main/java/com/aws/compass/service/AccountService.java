@@ -2,6 +2,7 @@ package com.aws.compass.service;
 
 import com.aws.compass.dto.EditUserReqDto;
 import com.aws.compass.entity.Academy;
+import com.aws.compass.entity.Review;
 import com.aws.compass.entity.User;
 import com.aws.compass.exception.AuthMailException;
 import com.aws.compass.exception.SendMailException;
@@ -120,5 +121,9 @@ public class AccountService {
 
     public int getLikeInfoCount(int academyId) {
         return accountMapper.getLikeCountByAcademyId(academyId);
+    }
+
+    public List<Review> getUserReviews(int userId) {
+        return accountMapper.getUserReviews(userId);
     }
 }

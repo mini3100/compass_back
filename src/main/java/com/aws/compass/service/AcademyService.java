@@ -21,7 +21,7 @@ public class AcademyService {
     public boolean academyRegist(AcademyRegistrationReqDto academyRegistrationReqDto) {
         AcademyRegistration academyRegistration = academyRegistrationReqDto.toAcademyRegist();
 
-        int errorCode = academyMapper.academyDuplicate(academyRegistration);
+        int errorCode = academyMapper.academyDuplicate(academyRegistration.getAcademyId());
         if(errorCode > 0) {
             throw new AcademyException("이미 등록된 학원입니다.");
         }
@@ -69,8 +69,8 @@ public class AcademyService {
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }
 
-    public ReviewRespDto getAcademyReviews(int academyId) {
-        return new ReviewRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
+    public ReviewListRespDto getAcademyReviews(int academyId) {
+        return new ReviewListRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
     }
 
     public boolean editAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
@@ -91,6 +91,17 @@ public class AcademyService {
         return academyMapper.writeReview(review) > 0;
     }
 
+    public ReviewRespDto getMyReview(int academyId, int userId) {
+        return new ReviewRespDto(academyMapper.getMyReview(academyId, userId));
+    }
+
+    public boolean modifyReview(ReviewReqDto reviewReqDto) {
+        return academyMapper.updateReview(reviewReqDto.toReview()) > 0;
+    }
+
+    public boolean deleteReview(int academyId, int userId) {
+        return academyMapper.deleteReview(academyId, userId) > 0;
+    }
 }
 
 

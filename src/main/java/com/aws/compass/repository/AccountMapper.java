@@ -1,6 +1,7 @@
 package com.aws.compass.repository;
 
 import com.aws.compass.entity.Academy;
+import com.aws.compass.entity.Review;
 import com.aws.compass.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,4 +22,6 @@ public interface AccountMapper {
     public List<Academy> getLikeAcademies(int userId);
 
     public int getLikeCountByAcademyId(int academyId);
+
+    public List<Review> getUserReviews(int userId);
 }
