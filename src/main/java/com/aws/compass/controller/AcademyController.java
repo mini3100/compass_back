@@ -88,4 +88,6 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.writeReview(reviewReqDto));
 
     }
+
+
 }

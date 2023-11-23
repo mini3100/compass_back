@@ -19,6 +19,7 @@ public class Purchase {
     private int userId;
     private int productId;
     private Date purchaseDate;
+    private int productPeriod;
 
     public PurchaseReqDto toPurchase() {
         return PurchaseReqDto.builder()
