@@ -24,6 +24,7 @@ public class AcademySearchVo {
     private int countAgeId;
     private List<Integer> convenienceIds;
     private int countConvenienceId;
+    private String classify;
     private int index;
     private int pSize;
 }
