@@ -287,13 +287,13 @@
                         LEFT OUTER JOIN attendance_age_tb aat ON aat.academy_info_id = ait.academy_info_id
                     WHERE
                         aat.age_id IN
-                <foreach collection="ageIds" item="ageId" open="(" separator="," close=")">
-                    #{ageId}
-                </foreach>
-                GROUP BY
-                    ait.ACADEMY_ID
-                HAVING
-                    COUNT(DISTINCT aat.age_id) = #{countAgeId}
+                        <foreach collection="ageIds" item="ageId" open="(" separator="," close=")">
+                            #{ageId}
+                        </foreach>
+                    GROUP BY
+                        ait.ACADEMY_ID
+                    HAVING
+                        COUNT(DISTINCT aat.age_id) = #{countAgeId}
                 )
             </if>
             <if test="convenienceIds != null and !convenienceIds.isEmpty()">
