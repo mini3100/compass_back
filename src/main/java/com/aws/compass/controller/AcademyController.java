@@ -32,53 +32,55 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.getAcademy(searchAcademysReqDto.getACADEMY_ID()));
     }
 
-    //학원 등록하기
+    //학원 등록 신청 하기
     @ValidAop
     @PostMapping("/api/academy")
     public ResponseEntity<?> getAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
 
+    // 등록된 학원 정보 수정
     @ValidAop
     @PutMapping("/api/academy/{academyRegistrationId}")
     public ResponseEntity<?> updateAcademyRegist(@PathVariable int academyRegistrationId, @Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
     }
 
+    // 신청된 학원 목록 보기
     @GetMapping("/api/academies/applied/{userId}/{page}")
     public ResponseEntity<?> getAppliedAcademies(@PathVariable int userId, @PathVariable int page) {
         return ResponseEntity.ok(academyService.getAppliedAcademies(userId, page));
     }
 
+
+    // 나의 학원보기
     @GetMapping("/api/academies/{userId}/{page}")
     public ResponseEntity<?> getMyAcademies(@PathVariable int userId, @PathVariable int page) {
         return ResponseEntity.ok(academyService.getMyAcademies(userId, page));
     }
 
+    // 나의 학원 정보
     @GetMapping("/api/academies/{userId}")
     public ResponseEntity<?> getMyAcademyNames(@PathVariable int userId) {
         return ResponseEntity.ok(academyService.getMyAcademyNames(userId));
     }
 
-    //상세페이지 - 후기 가져오기
+    // 상세페이지 - 후기 목록 가져오기
     @GetMapping("/api/academy/{academyId}/reviews")
     public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
     }
 
+    // 등록된 학원인지 확인
     @GetMapping("/api/academy/check/{academyId}")
     public ResponseEntity<?> isAcademyAdminRegistered(@PathVariable int academyId) {
         return ResponseEntity.ok(academyService.isAcademyRegistered(academyId));
     }
 
+    // 학원 정보 수정
     @PutMapping("/api/academy")
     public ResponseEntity<?> editAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
         return ResponseEntity.ok(academyService.editAcademyInfo(editAcademyInfoReqDto));
-    }
-
-    @PostMapping("/api/academyInfo/{ACADEMY_ID}")
-    public ResponseEntity<?> addAcademyInfo(@RequestBody EditAcademyInfoReqDto editAcademyInfoReqDto) {
-        return ResponseEntity.ok(academyService.addAcademyInfo(editAcademyInfoReqDto));
     }
 
     //상세페이지 - 후기 쓰기

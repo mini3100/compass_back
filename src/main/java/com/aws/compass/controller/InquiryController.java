@@ -30,7 +30,7 @@ public class InquiryController {
         return ResponseEntity.ok(inquiryService.getUserInquiries(userId, page));
     }
 
-    // 등록된 학원의 문의 가져오기
+    // 등록된 학원 문의 가져오기
     @GetMapping("/api/academy/inquiries")
     public ResponseEntity<?> getInquiryList(AcademyInquiryReqDto inquiryReqDto) {
         System.out.println(inquiryReqDto);
