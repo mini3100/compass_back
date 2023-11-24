@@ -23,6 +23,7 @@ public class SearchAcademysReqDto {
     private int countAgeId;
     private List<Integer> convenienceIds;
     private int countConvenienceId;
+    private String classify;
 
     public AcademySearchVo toVo() {
         return AcademySearchVo.builder()
@@ -39,6 +40,7 @@ public class SearchAcademysReqDto {
                 .countAgeId(countAgeId)
                 .convenienceIds(convenienceIds)
                 .countConvenienceId(countConvenienceId)
+                .classify(classify)
                 .build();
     }
 
