@@ -18,6 +18,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+    // 회원가입
     @ValidAop
     @PostMapping("/api/auth/signup")
     public ResponseEntity<?> signup(
