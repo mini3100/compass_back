@@ -229,6 +229,7 @@
             at.ACADEMY_ID,
             at.ATPT_OFCDC_SC_CODE,
             at.ADMST_ZONE_NM,
+            at.ACA_ASNUM,
             at.ACA_NM,
             at.REALM_SC_NM,
             at.LE_CRSE_NM,
