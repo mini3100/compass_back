@@ -172,6 +172,7 @@
             lt.user_id = #{userId}
         group by
             lt.ACADEMY_ID
+        limit #{index}, 9
     </select>
 
     <select id="getLikeCountByAcademyId"

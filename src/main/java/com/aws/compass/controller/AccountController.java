@@ -78,9 +78,9 @@ public class AccountController {
     }
 
     // 관심 학원
-    @GetMapping("/api/account/mypage/like/{userId}")
-    public ResponseEntity<?> getLikeAcademies(@PathVariable int userId) {
-        return ResponseEntity.ok(accountService.getLikeAcademy(userId));
+    @GetMapping("/api/account/mypage/like/{userId}/{page}")
+    public ResponseEntity<?> getLikeAcademies(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(accountService.getLikeAcademy(userId, page));
     }
 
     // 관심학원 COUNT

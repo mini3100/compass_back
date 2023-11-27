@@ -116,8 +116,10 @@ public class AccountService {
         return accountMapper.getLikeCountByUserId(userId);
     }
 
-    public List<Academy> getLikeAcademy(int userId) {
-        return accountMapper.getLikeAcademies(userId);
+    public List<Academy> getLikeAcademy(int userId, int page) {
+        int index = (page - 1) * 5;
+
+        return accountMapper.getLikeAcademies(userId, index);
     }
 
     public int getLikeInfoCount(int academyId) {
