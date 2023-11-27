@@ -52,6 +52,8 @@
         <result property="FA_TELNO" column="FA_TELNO" />
         <result property="LOAD_DTM" column="LOAD_DTM" />
         <result property="logoImg" column="logo_img" />
+        <result property="like_count" column="LIKE_COUNT" />
+        <result property="avg_score" column="AVG_SCORE" />
     </resultMap>
 
 
@@ -158,14 +160,18 @@
             at.ACA_NM,
             at.REALM_SC_NM,
             at.FA_RDNMA,
-            ait.logo_img
+            ait.logo_img,
+            count(lt.ACADEMY_ID) AS LIKE_COUNT,
+            IFNULL(AVG(score), 0) AS AVG_SCORE
         from
             like_tb lt
-            left outer join academy_tb at on(at.academy_id = lt.academy_id)
-            left outer join academy_info_tb ait on(ait.academy_id = lt.academy_id)
+            left outer join academy_tb at on(at.ACADEMY_ID = lt.ACADEMY_ID)
+            left outer join academy_info_tb ait on(ait.ACADEMY_ID = lt.ACADEMY_ID)
+            left outer join review_tb rt on(rt.ACADEMY_ID = lt.ACADEMY_ID)
         where
             lt.user_id = #{userId}
-
+        group by
+            lt.ACADEMY_ID
     </select>
 
     <select id="getLikeCountByAcademyId"
