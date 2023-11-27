@@ -242,9 +242,9 @@
             AVG(score) AS AVG_SCORE
         FROM
             academy_tb at
-            LEFT JOIN academy_info_tb ait ON (ait.ACADEMY_ID = at.ACADEMY_ID)
-            LEFT JOIN like_tb lt ON (lt.ACADEMY_ID = at.ACADEMY_ID)
-            LEFT JOIN review_tb rt ON (rt.ACADEMY_ID = at.ACADEMY_ID)
+            left outer join academy_info_tb ait ON (ait.ACADEMY_ID = at.ACADEMY_ID)
+            left outer join like_tb lt ON (lt.ACADEMY_ID = at.ACADEMY_ID)
+            left outer join review_tb rt ON (rt.ACADEMY_ID = at.ACADEMY_ID)
         WHERE
             1 = 1
             <if test="atptOfcdcScCode != null and !atptOfcdcScCode.equals('')">
@@ -310,7 +310,7 @@
             at.ACADEMY_ID
         ORDER BY
             CASE
-                WHEN #{classify} = '등록순' THEN ait.ACADEMY_ID
+                WHEN #{classify} = '등록순' THEN ait.academy_info_id
                 WHEN #{classify} = '좋아요순' THEN LIKE_COUNT
                 WHEN #{classify} = '별점순' THEN AVG_SCORE
                 ELSE ait.ACADEMY_ID
