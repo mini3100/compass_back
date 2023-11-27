@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class ReviewCount {
     private int reviewCount;
-    private int scoreAvg;
+    private float scoreAvg;
 }

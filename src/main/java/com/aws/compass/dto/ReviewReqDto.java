@@ -9,7 +9,7 @@ public class ReviewReqDto {
     @JsonProperty("ACADEMY_ID")
     private int ACADEMY_ID;
     private int userId;
-    private int score;
+    private float score;
     private String reviewContent;
 
     public Review toReview(){
