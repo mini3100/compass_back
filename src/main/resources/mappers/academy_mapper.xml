@@ -238,13 +238,21 @@
             at.FA_RDNZC,
             at.FA_TELNO,
             ait.logo_img,
-            COUNT(lt.ACADEMY_ID) AS LIKE_COUNT,
-            AVG(score) AS AVG_SCORE
+            IFNULL(lt.LIKE_COUNT, 0) AS LIKE_COUNT,
+            IFNULL(rt.AVG_SCORE, 0) AS AVG_SCORE
         FROM
             academy_tb at
             left outer join academy_info_tb ait ON (ait.ACADEMY_ID = at.ACADEMY_ID)
-            left outer join like_tb lt ON (lt.ACADEMY_ID = at.ACADEMY_ID)
-            left outer join review_tb rt ON (rt.ACADEMY_ID = at.ACADEMY_ID)
+            left outer join (
+                SELECT ACADEMY_ID, COUNT(*) AS LIKE_COUNT
+                FROM like_tb
+                GROUP BY ACADEMY_ID
+            ) lt ON lt.ACADEMY_ID = at.ACADEMY_ID
+            left outer join (
+                SELECT ACADEMY_ID, AVG(score) AS AVG_SCORE
+                FROM review_tb
+                GROUP BY ACADEMY_ID
+            ) rt ON rt.ACADEMY_ID = at.ACADEMY_ID
         WHERE
             1 = 1
             <if test="atptOfcdcScCode != null and !atptOfcdcScCode.equals('')">

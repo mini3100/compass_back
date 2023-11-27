@@ -155,23 +155,28 @@
 
     <select id="getLikeAcademies"
             resultMap="academyMap">
-        select
+        SELECT
             at.ACADEMY_ID,
             at.ACA_NM,
             at.REALM_SC_NM,
             at.FA_RDNMA,
             ait.logo_img,
-            count(lt.ACADEMY_ID) AS LIKE_COUNT,
-            IFNULL(AVG(score), 0) AS AVG_SCORE
-        from
+            IFNULL(clt.LIKE_COUNT, 0) AS LIKE_COUNT,
+            IFNULL(AVG(rt.score), 0) AS AVG_SCORE
+        FROM
             like_tb lt
-            left outer join academy_tb at on(at.ACADEMY_ID = lt.ACADEMY_ID)
-            left outer join academy_info_tb ait on(ait.ACADEMY_ID = lt.ACADEMY_ID)
-            left outer join review_tb rt on(rt.ACADEMY_ID = lt.ACADEMY_ID)
+            LEFT OUTER JOIN academy_tb at ON (at.ACADEMY_ID = lt.ACADEMY_ID)
+            LEFT OUTER JOIN academy_info_tb ait ON (ait.ACADEMY_ID = lt.ACADEMY_ID)
+            LEFT OUTER JOIN review_tb rt ON (rt.ACADEMY_ID = lt.ACADEMY_ID)
+            LEFT OUTER JOIN (
+                SELECT ACADEMY_ID, COUNT(*) AS LIKE_COUNT
+                FROM like_tb
+                GROUP BY ACADEMY_ID
+            ) clt ON clt.ACADEMY_ID = at.ACADEMY_ID
         where
             lt.user_id = #{userId}
         group by
-            lt.ACADEMY_ID
+            at.ACADEMY_ID
         order by
             lt.like_id desc
         limit #{index}, 9
