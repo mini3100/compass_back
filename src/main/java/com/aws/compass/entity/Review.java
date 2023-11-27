@@ -17,7 +17,7 @@ public class Review {
     @JsonProperty("ACADEMY_ID")
     private int ACADEMY_ID;
     private int userId;
-    private int score;
+    private float score;
     private String reviewContent;
     private String nickname;
     private String academyName;
