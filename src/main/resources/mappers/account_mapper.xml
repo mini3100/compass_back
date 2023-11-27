@@ -172,6 +172,8 @@
             lt.user_id = #{userId}
         group by
             lt.ACADEMY_ID
+        order by
+            lt.like_id desc
         limit #{index}, 9
     </select>
 
