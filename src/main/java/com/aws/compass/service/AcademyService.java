@@ -70,8 +70,9 @@ public class AcademyService {
         return new MyAcademiesRespDto(academyRegistrations, listTotalCount);
     }
 
-    public ReviewListRespDto getAcademyReviews(int academyId) {
-        return new ReviewListRespDto(academyMapper.getAcademyReviews(academyId), academyMapper.getAcademyReviewCount(academyId));
+    public ReviewListRespDto getAcademyReviews(int academyId, int page) {
+        int index = (page - 1) * 5;
+        return new ReviewListRespDto(academyMapper.getAcademyReviews(academyId, index), academyMapper.getAcademyReviewCount(academyId));
     }
   
     public List<MyAcademyNamesRespDto> getMyAcademyNames(int userId) {

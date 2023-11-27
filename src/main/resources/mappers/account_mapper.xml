@@ -190,7 +190,18 @@
         	review_tb rt
         	left outer join academy_tb at on(at.ACADEMY_ID = rt.ACADEMY_ID)
         where
-        	rt.user_id = #{userId};
+        	rt.user_id = #{userId}
+        order by
+            review_id desc
+        limit #{index}, 5
+    </select>
+    <select id="getUserReviewCount" resultType="com.aws.compass.entity.ReviewCount">
+        select
+        	count(review_id) as reviewCount
+        from
+        	review_tb
+        where
+        	user_id = #{userId};
     </select>
 
     <!--    <select id="getLikeAcademiesByUserId"-->

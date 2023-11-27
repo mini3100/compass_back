@@ -89,9 +89,8 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getLikeInfoCount(academyId));
     }
 
-    // 후기 목록 가져오기
-    @GetMapping("/api/account/{userId}/reviews")
-    public ResponseEntity<?> getUserReviews(@PathVariable int userId) {
-        return ResponseEntity.ok(accountService.getUserReviews(userId));
+    @GetMapping("/api/account/{userId}/reviews/{page}")
+    public ResponseEntity<?> getUserReviews(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(accountService.getUserReviews(userId, page));
     }
 }
