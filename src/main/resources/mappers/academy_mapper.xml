@@ -31,6 +31,8 @@
         <result property="FA_TELNO" column="FA_TELNO" />
         <result property="LOAD_DTM" column="LOAD_DTM" />
         <result property="logoImg" column="logo_img" />
+        <result property="like_count" column="LIKE_COUNT" />
+        <result property="avg_score" column="AVG_SCORE" />
     </resultMap>
 
     <resultMap id="academyRegistrationMap" type="com.aws.compass.entity.AcademyRegistration">
@@ -226,34 +228,23 @@
         SELECT
             at.ACADEMY_ID,
             at.ATPT_OFCDC_SC_CODE,
-            at.ATPT_OFCDC_SC_NM,
             at.ADMST_ZONE_NM,
-            at.ACA_INSTI_SC_NM,
             at.ACA_ASNUM,
             at.ACA_NM,
-            at.ESTBL_YMD,
-            at.REG_YMD,
-            at.REG_STTUS_NM,
-            at.CAA_BEGIN_YMD,
-            at.CAA_END_YMD,
-            at.TOFOR_SMTOT,
-            at.DTM_RCPTN_ABLTY_NMPR_SMTOT,
             at.REALM_SC_NM,
-            at.LE_ORD_NM,
-            at.LE_CRSE_LIST_NM,
             at.LE_CRSE_NM,
-            at.PSNBY_THCC_CNTNT,
-            at.THCC_OTHBC_YN,
-            at.BRHS_ACA_YN,
             at.FA_RDNMA,
             at.FA_RDNDA,
             at.FA_RDNZC,
             at.FA_TELNO,
-            at.LOAD_DTM,
-            ait.logo_img
+            ait.logo_img,
+            COUNT(lt.ACADEMY_ID) AS LIKE_COUNT,
+            AVG(score) AS AVG_SCORE
         FROM
             academy_tb at
-                left outer join academy_info_tb ait on(ait.ACADEMY_ID = at.ACADEMY_ID)
+            LEFT JOIN academy_info_tb ait ON (ait.ACADEMY_ID = at.ACADEMY_ID)
+            LEFT JOIN like_tb lt ON (lt.ACADEMY_ID = at.ACADEMY_ID)
+            LEFT JOIN review_tb rt ON (rt.ACADEMY_ID = at.ACADEMY_ID)
         WHERE
             1 = 1
             <if test="atptOfcdcScCode != null and !atptOfcdcScCode.equals('')">
@@ -315,15 +306,13 @@
                         COUNT(DISTINCT act.convenience_id) = #{countConvenienceId}
                 )
             </if>
+        GROUP BY
+            at.ACADEMY_ID
         ORDER BY
             CASE
                 WHEN #{classify} = '등록순' THEN ait.ACADEMY_ID
-                WHEN #{classify} = '좋아요순' THEN (
-                    SELECT COUNT(*) FROM like_tb WHERE like_tb.ACADEMY_ID = at.ACADEMY_ID
-                )
-                WHEN #{classify} = '별점순' THEN (
-                    SELECT avg(score) FROM review_tb WHERE review_tb.ACADEMY_ID = at.ACADEMY_ID
-                )
+                WHEN #{classify} = '좋아요순' THEN LIKE_COUNT
+                WHEN #{classify} = '별점순' THEN AVG_SCORE
                 ELSE ait.ACADEMY_ID
             END DESC
         LIMIT #{index}, #{pSize}

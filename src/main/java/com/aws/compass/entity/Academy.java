@@ -65,6 +65,8 @@ public class Academy {
     @JsonProperty("LOAD_DTM")
     private String LOAD_DTM;
     private String logoImg;
+    private int like_count;
+    private int avg_score;
 
     public MyAcademyNamesRespDto toMyAcademyNamesRespDto() {
         return MyAcademyNamesRespDto.builder()
