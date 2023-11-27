@@ -79,8 +79,8 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getLikeInfoCount(academyId));
     }
 
-    @GetMapping("/api/account/{userId}/reviews")
-    public ResponseEntity<?> getUserReviews(@PathVariable int userId) {
-        return ResponseEntity.ok(accountService.getUserReviews(userId));
+    @GetMapping("/api/account/{userId}/reviews/{page}")
+    public ResponseEntity<?> getUserReviews(@PathVariable int userId, @PathVariable int page) {
+        return ResponseEntity.ok(accountService.getUserReviews(userId, page));
     }
 }

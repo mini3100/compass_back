@@ -1,6 +1,7 @@
 package com.aws.compass.service;
 
 import com.aws.compass.dto.EditUserReqDto;
+import com.aws.compass.dto.ReviewListRespDto;
 import com.aws.compass.entity.Academy;
 import com.aws.compass.entity.Review;
 import com.aws.compass.entity.User;
@@ -123,7 +124,8 @@ public class AccountService {
         return accountMapper.getLikeCountByAcademyId(academyId);
     }
 
-    public List<Review> getUserReviews(int userId) {
-        return accountMapper.getUserReviews(userId);
+    public ReviewListRespDto getUserReviews(int userId, int page) {
+        int index = (page - 1) * 5;
+        return new ReviewListRespDto(accountMapper.getUserReviews(userId, index), accountMapper.getUserReviewCount(userId));
     }
 }

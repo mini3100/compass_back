@@ -531,18 +531,20 @@
         	review_tb rt
             left outer join user_tb ut on(ut.user_id = rt.user_id)
         where
-            rt.ACADEMY_ID = #{academyId};
+            rt.ACADEMY_ID = #{academyId}
+        order by
+            review_id desc
+        limit #{index}, 5
     </select>
 
     <select id="getAcademyReviewCount" resultType="com.aws.compass.entity.ReviewCount">
         select
-            count(rt.review_id) as reviewCount,
-            Round(avg(score), 1) as scoreAvg
+        	count(review_id) as reviewCount,
+        	Round(avg(score), 1) as scoreAvg
         from
-        	review_tb rt
-        	left outer join user_tb ut on(ut.user_id = rt.user_id)
+        	review_tb
         where
-        	rt.ACADEMY_ID = #{id};
+        	ACADEMY_ID = #{academyId};
     </select>
 
     <select id="reviewDuplicate" resultType="java.lang.Integer">

@@ -61,9 +61,9 @@ public class AcademyController {
     }
 
     //상세페이지 - 후기 가져오기
-    @GetMapping("/api/academy/{academyId}/reviews")
-    public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId) {
-        return ResponseEntity.ok(academyService.getAcademyReviews(academyId));
+    @GetMapping("/api/academy/{academyId}/reviews/{page}")
+    public ResponseEntity<?> getAcademyReviews(@PathVariable int academyId, @PathVariable int page) {
+        return ResponseEntity.ok(academyService.getAcademyReviews(academyId, page));
     }
 
     @GetMapping("/api/academy/check/{academyId}")
