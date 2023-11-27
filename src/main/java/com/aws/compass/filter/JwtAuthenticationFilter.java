@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
@@ -20,17 +21,27 @@ public class JwtAuthenticationFilter extends GenericFilter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
         String bearerToken = httpServletRequest.getHeader("Authorization");
         String token = jwtProvider.getToken(bearerToken);
 
-        Authentication authentication = jwtProvider.getAuthentication(token);
+        try {
+            Authentication authentication = jwtProvider.getAuthentication(token);
 
-        //토큰이 유효하다면 SecurityContextHolder에 토큰 저장
-        if(authentication != null) {
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            //토큰이 유효하다면 SecurityContextHolder에 토큰 저장
+            if(authentication != null) {
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            } catch (Exception e) {
+                // 토큰이 만료 되었을 때 예외 처리
+                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
+            chain.doFilter(request, response);
+
         }
-        chain.doFilter(request, response);
-    }
+
 }
+
 
