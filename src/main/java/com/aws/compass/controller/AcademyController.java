@@ -41,7 +41,7 @@ public class AcademyController {
 
     // 등록된 학원 정보 수정
     @ValidAop
-    @PutMapping("/api/academy/{academyRegistrationId}")
+    @PutMapping("/api/academy")
     public ResponseEntity<?> updateAcademyRegist(@PathVariable int academyRegistrationId, @Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
     }

@@ -30,9 +30,8 @@ public class AcademyService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateAcademyRegist(int academyRegistrationId, AcademyRegistrationReqDto academyRegistrationReqDto) {
+    public boolean updateAcademyRegist(AcademyRegistrationReqDto academyRegistrationReqDto) {
         AcademyRegistration academyRegistration = academyRegistrationReqDto.toAcademyRegist();
-        academyRegistration.setAcademyRegistrationId(academyRegistrationId);
 
         return academyMapper.updateAcademyRegist(academyRegistration) > 0;
     }

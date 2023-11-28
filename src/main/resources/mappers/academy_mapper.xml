@@ -105,7 +105,7 @@
             </choose>
             reject_reason = null
         where
-            academy_registration_id = #{academyRegistrationId}
+            ACADEMY_ID = #{academyId}
     </update>
     <update id="updateAcademyInfo" parameterType="com.aws.compass.entity.AcademyInfo">
         update
