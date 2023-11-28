@@ -39,9 +39,9 @@ public class AcademyController {
         return ResponseEntity.ok(academyService.academyRegist(academyRegistrationReqDto));
     }
 
-    // 등록된 학원 정보 수정
+    // 승인 거절 학원 재신청
     @ValidAop
-    @PutMapping("/api/academy")
+    @PutMapping("/api/academy/reapplied")
     public ResponseEntity<?> updateAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationReqDto));
     }
