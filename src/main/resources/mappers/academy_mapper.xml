@@ -352,10 +352,6 @@
         insert into review_tb
         values(0, #{ACADEMY_ID}, #{userId}, #{score}, #{reviewContent});
     </insert>
-    <insert id="insertAcademyInfo">
-        insert into academy_info_tb
-        values(0, #{ACADEMY_ID}, #{userId}, #{logoImg}, #{classSize}, #{coursePeriod}, #{purpose}, #{homePage}, #{phone})
-    </insert>
     <insert id="insertConvenience">
         insert into academy_convenience_tb
         values(0, #{academyInfoId}, #{convenienceId})

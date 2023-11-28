@@ -25,7 +25,6 @@ public interface AcademyMapper {
     public List<Review> getAcademyReviews(int academyId, int index);
     public int getRegisteredAcademy(int academyId);
     public int updateAcademyInfo(AcademyInfo academyInfo);
-    public int insertAcademyInfo(AcademyInfo academyInfo);
     public int deleteAge(int academyInfoId);
     public int insertAge(int academyInfoId, int ageId);
     public int deleteConvenience(int academyInfoId);
