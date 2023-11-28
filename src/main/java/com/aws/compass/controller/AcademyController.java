@@ -42,8 +42,8 @@ public class AcademyController {
     // 등록된 학원 정보 수정
     @ValidAop
     @PutMapping("/api/academy")
-    public ResponseEntity<?> updateAcademyRegist(@PathVariable int academyRegistrationId, @Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
-        return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationId, academyRegistrationReqDto));
+    public ResponseEntity<?> updateAcademyRegist(@Valid @RequestBody AcademyRegistrationReqDto academyRegistrationReqDto, BindingResult bindingResult) {
+        return ResponseEntity.ok(academyService.updateAcademyRegist(academyRegistrationReqDto));
     }
 
     // 신청된 학원 목록 보기
