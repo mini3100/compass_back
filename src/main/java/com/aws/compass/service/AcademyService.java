@@ -104,12 +104,6 @@ public class AcademyService {
         });
         return true;
     }
-
-    @Transactional(rollbackFor = Exception.class)
-    public boolean addAcademyInfo(EditAcademyInfoReqDto editAcademyInfoReqDto) {
-        AcademyInfo academyInfo = editAcademyInfoReqDto.getAcademyInfo();
-        return academyMapper.insertAcademyInfo(academyInfo) > 0;
-    }
   
     public boolean writeReview(ReviewReqDto reviewReqDto) {
         Review review = reviewReqDto.toReview();
