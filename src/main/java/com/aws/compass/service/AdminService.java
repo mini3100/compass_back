@@ -1,7 +1,7 @@
 package com.aws.compass.service;
 
 import com.aws.compass.dto.ApprovalAcademyReqDto;
-import com.aws.compass.dto.AwaitingAcademiesRepDto;
+import com.aws.compass.dto.AwaitingAcademiesRespDto;
 import com.aws.compass.dto.DisapprovalReqDto;
 import com.aws.compass.entity.AcademyRegistration;
 import com.aws.compass.repository.AdminMapper;
@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,13 +17,13 @@ public class AdminService {
 
     private final AdminMapper adminMapper;
 
-    public AwaitingAcademiesRepDto getAwaitingAcademies(int page) {
+    public AwaitingAcademiesRespDto getAwaitingAcademies(int page) {
         int index = (page - 1) * 5;
 
         List<AcademyRegistration> academyRegistrations = adminMapper.getAcademyRegistrations(index);
         int listTotalCount = adminMapper.getAwaitingAcademyCount();
 
-        return new AwaitingAcademiesRepDto(academyRegistrations, listTotalCount);
+        return new AwaitingAcademiesRespDto(academyRegistrations, listTotalCount);
     }
 
     @Transactional(rollbackFor = Exception.class)

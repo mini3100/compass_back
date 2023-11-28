@@ -63,7 +63,7 @@
         where
             art.approval_status = 0
         order by
-            art.academy_registration_id desc
+            art.academy_registration_id asc
         limit #{index}, 5
     </select>
     <select id="getAwaitingAcademyCount" resultType="java.lang.Integer">

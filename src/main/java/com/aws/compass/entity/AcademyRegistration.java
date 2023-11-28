@@ -1,6 +1,5 @@
 package com.aws.compass.entity;
 
-import com.aws.compass.dto.AwaitingAcademiesRepDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

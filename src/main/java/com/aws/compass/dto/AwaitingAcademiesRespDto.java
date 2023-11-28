@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @Data
 @AllArgsConstructor
-public class AwaitingAcademiesRepDto {
+public class AwaitingAcademiesRespDto {
     private List<AcademyRegistration> academyRegistrations;
     private int listTotalCount;
 }
