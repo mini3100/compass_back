@@ -14,6 +14,7 @@ public interface AccountMapper {
     public User findUserByEmail(String email);
     public int updateEnabledToEmail(String email);
     public int checkDuplicateAndIdNot(User user);
+    public int deleteUser(int userId);
 
     public int getLikeState(int userId, int academyId);
     public int insertLike(int userId, int academyId);

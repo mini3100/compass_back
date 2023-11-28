@@ -93,4 +93,9 @@ public class AccountController {
     public ResponseEntity<?> getUserReviews(@PathVariable int userId, @PathVariable int page) {
         return ResponseEntity.ok(accountService.getUserReviews(userId, page));
     }
+
+    @DeleteMapping("/api/account/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable int userId){
+        return ResponseEntity.ok(accountService.deleteUser(userId));
+    }
 }

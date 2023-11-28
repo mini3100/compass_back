@@ -93,6 +93,14 @@
             and ACADEMY_ID = #{academyId}
     </delete>
 
+    <delete id="deleteUser">
+        delete
+        from
+        	user_tb
+        where
+        	user_id = #{userId}
+    </delete>
+
     <select id="findUserByEmail" resultMap="userMap">
         select
             user_id,
@@ -218,15 +226,4 @@
         where
         	user_id = #{userId};
     </select>
-
-    <!--    <select id="getLikeAcademiesByUserId"-->
-<!--            resultType="com.aws.compass.entity.AcademyRegistration">-->
-<!--        select-->
-<!--            aca_nm-->
-<!--        from-->
-<!--            like_tb-->
-<!--        where-->
-<!--            user_id = #{userId}-->
-<!--    </select>-->
-
 </mapper>

@@ -130,4 +130,6 @@ public class AccountService {
         int index = (page - 1) * 5;
         return new ReviewListRespDto(accountMapper.getUserReviews(userId, index), accountMapper.getUserReviewCount(userId));
     }
+
+    public int deleteUser(int userId) { return accountMapper.deleteUser(userId); }
 }
