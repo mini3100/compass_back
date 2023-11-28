@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();            // WebMvcConfig의 CORS 설정을 적용
         http.csrf().disable();  // CSRF 보호 비활성화
         http.authorizeRequests()
-                .antMatchers("/api/auth/**", "/api/option/**", "/api/account/auth/email",
-                        "/api/academies", "/api/academy/**", "/api/account/like/**",
-                        "/api/review/**", "/api/purchase/**", "/api/academy/check/**", "/api/account/**/reviews/**",
+                .antMatchers("/api/auth/**", "/api/option/**",
+                        "/api/academies", "/api/academy/**",
+                        "/api/review/**", "/api/purchase/**", "/api/academy/check/**",
                         "/api/ad/academies/random")
                 .permitAll()
                 .anyRequest()
