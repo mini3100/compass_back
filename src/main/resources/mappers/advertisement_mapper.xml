@@ -45,10 +45,12 @@
             at.REALM_SC_NM,
             at.LE_CRSE_LIST_NM,
             at.FA_TELNO,
+            ait.logo_img,
             IFNULL(lt.LIKE_COUNT, 0) AS LIKE_COUNT,
             IFNULL(rt.AVG_SCORE, 0) AS AVG_SCORE
         from
             purchase_info_tb pit
+            left outer join academy_info_tb ait ON (ait.ACADEMY_ID = pit.ACADEMY_ID)
             left outer join product_tb pt on(pt.product_id = pit.product_id)
             left outer join academy_tb at on(at.ACADEMY_ID = pit.ACADEMY_ID)
             left outer join (
